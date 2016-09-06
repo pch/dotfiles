@@ -1,6 +1,9 @@
 alias gst='git status'
-alias gd='git diff'
-alias gb='git branch'
-alias gba='git branch -a'
-alias grm="git status | grep deleted | awk '{\$1=\$2=\"\"; print \$0}' | \
-           perl -pe 's/^[ \t]*//' | sed 's/ /\\\\ /g' | xargs git rm"
+
+# Remove `+` and `-` from start of diff lines; just rely upon color.
+alias gd='git diff --color | sed -E "s/^([^-+ ]*)[-+ ]/\\1/" | less -r'
+
+alias gc='git commit'
+alias gca='git commit -a'
+alias gco='git checkout'
+alias gcb='git copy-branch-name'

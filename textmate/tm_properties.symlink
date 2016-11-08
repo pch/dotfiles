@@ -14,7 +14,7 @@ excludeInFolderSearch = "{$excludeInFolderSearch,$myExtraExcludes}"
 # If you also want to hide them from your project manager pane, add
 # the following line to your project's local .tm_properties.
 #
-excludeInBrowser      = "{$excludeInBrowser,log,vendor,tmp}"
+excludeInBrowser      = "{$excludeInBrowser,log,tmp}"
 
 
 # Configure git and hg

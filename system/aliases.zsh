@@ -17,3 +17,5 @@ alias less="less -R"
 
 # Pipe my public key to my clipboard.
 alias pubkey="more ~/.ssh/id_rsa.pub | pbcopy | echo '=> Public key copied to pasteboard.'"
+
+tssh() { ssh $1 -t 'tmux -CC new -A -s main' }

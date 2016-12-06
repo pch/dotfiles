@@ -74,6 +74,11 @@ nmap <leader>P "*PV`]=
 " copy to system clipboard with <leader>y
 map <leader>y "*y
 
+" copy current file path to system clipboard
+nmap <leader>cs :let @*=expand("%")<CR>
+" copy current (full) file path to system clipboard
+nmap <leader>cl :let @*=expand("%:p")<CR>
+
 " display trailing whitespace
 set list listchars=tab:»·,trail:·,nbsp:·
 

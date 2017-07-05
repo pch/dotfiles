@@ -119,6 +119,10 @@ let g:airline_theme='base16'
 set tags+=.git/tags
 map <Leader>rt :!ctags --tag-relative --extra=+f -Rf.git/tags --exclude=.git,pkg --languages=-javascript,sql<CR><CR>
 
+" easier indentation in visual mode
+vmap q <gv
+vmap <TAB> >gv
+
 " Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
 if executable('ag')
   " Use Ag over Grep
@@ -247,3 +251,9 @@ function! AlternateForCurrentFile()
   return new_file
 endfunction
 nnoremap <leader>. :call OpenTestAlternate()<cr>
+
+" Abbreviations / common typos
+abbr funciton function
+abbr teh the
+abbr tempalte template
+abbr fitler filter

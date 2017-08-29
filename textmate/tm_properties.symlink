@@ -1,7 +1,7 @@
 
 # Extra files to include
 #
-myExtraIncludes = ".tm_properties,.htaccess,.gitignore"
+myExtraIncludes = ".tm_properties,.htaccess,.gitignore,.*"
 fileBrowserGlob  = "{*,$myExtraIncludes}"
 include = "{$include,$myExtraIncludes}"
 
@@ -31,6 +31,7 @@ tabSize          = 2
 #
 [ text ]
 showInvisibles   = true
+softWrap         = true
 
 [ .git/COMMIT_EDITMSG ]
 spellChecking    = true
@@ -40,6 +41,7 @@ spellingLanguage = 'en'
 binary           = true
 
 [ source ]
+softWrap         = false
 softTabs         = true
 tabSize          = 2
 

@@ -71,6 +71,9 @@ nnoremap Q <nop>
 nmap <leader>p "*pV`]=
 nmap <leader>P "*PV`]=
 
+nmap <leader>pp pV`]=
+nmap <leader>PP PV`]=
+
 " copy to system clipboard with <leader>y
 map <leader>y "*y
 

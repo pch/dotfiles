@@ -18,6 +18,7 @@ brew 'ruby-build'
 brew 'rbenv'
 brew 'unrar'
 brew 'redis'
+brew 'z'
 
 cask '1password'
 cask 'google-chrome'

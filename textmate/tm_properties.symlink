@@ -7,7 +7,7 @@ include = "{$include,$myExtraIncludes}"
 
 # Hide log, vendor and tmp directories from search popups.
 #
-myExtraExcludes = "log,tmp"
+myExtraExcludes = "log,tmp,public/uploads,public/downloads,node_modules"
 excludeInFileChooser  = "{$excludeInFileChooser,$myExtraExcludes}"
 excludeInFolderSearch = "{$excludeInFolderSearch,$myExtraExcludes}"
 
@@ -31,7 +31,7 @@ tabSize          = 2
 #
 [ text ]
 showInvisibles   = true
-softWrap         = true
+softWrap         = false
 
 [ .git/COMMIT_EDITMSG ]
 spellChecking    = true

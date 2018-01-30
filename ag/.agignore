@@ -6,4 +6,5 @@ vendor
 bower_components/
 node_modules/
 app/assets/images/
-
+public/uploads/
+public/downloads/

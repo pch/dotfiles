@@ -132,6 +132,9 @@ map <Leader>rt :!ctags --tag-relative --extra=+f -Rf.git/tags --exclude=.git,pkg
 vmap q <gv
 vmap <TAB> >gv
 
+" Use one space, not two, after punctuation.
+set nojoinspaces
+
 " Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
 if executable('ag')
   " Use Ag over Grep

@@ -106,6 +106,10 @@ nmap <leader>cs :let @*=expand("%")<CR>
 " copy current (full) file path to system clipboard
 nmap <leader>cl :let @*=expand("%:p")<CR>
 
+" Formatting, TextMate-style
+nnoremap Q gqip
+vnoremap Q gq
+
 " display trailing whitespace
 set list listchars=tab:»·,trail:·,nbsp:·
 

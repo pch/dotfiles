@@ -12,7 +12,7 @@
 set -e
 
 url=`pbpaste`
-image_url=`curl -sL $url | grep 'og:image' | grep -Eo '(http|https)://[^?]+'`
+image_url=`curl -sL $url | grep 'og:image' | grep -Eo '(http|https)://[^?"]+'`
 
 echo "Downloading ${url}"
 cd ~/Desktop

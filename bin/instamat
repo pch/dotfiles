@@ -1,0 +1,51 @@
+#!/usr/bin/env ruby
+
+# size = 1080
+# default_margin = 18
+# target_path = '~/Dropbox/Instagram'
+# quality = 80
+#
+# src_image = ARGV[0]
+# margin = (ARGV[1] || default_margin).to_i
+#
+# image_size = size - (margin * 2)
+# target_file = "#{target_path}/#{File.basename(src_image)}"
+#
+# puts src_image
+# puts margin
+# puts image_size
+#
+# puts File.basename(src_image)
+#
+# # `convert #{src_image} -resize #{image_size}x#{image_size} -gravity center -background white -extent #{size}x#{size} -colorspace sRGB -sampling-factor 2x2,1x1,1x1 -quality #{quality} #{target_file}`
+# `convert #{src_image} -resize #{image_size}x#{image_size} -gravity center -background white -extent #{size}x#{size} -strip -sampling-factor 2x2,1x1,1x1 -quality #{quality} #{target_file}`
+#
+# # strip exif, keep colorspace
+# # `exiftool -overwrite_original -all= #{target_file} -tagsfromfile @ -colorspace -interopindex -icc_profile`
+# `open #{target_path}`
+
+size = 1080
+default_margin = 18
+target_path = '~/Dropbox/Instagram'
+quality = 100
+src_image = ARGV[0]
+margin = (ARGV[1] || default_margin).to_i
+target_file = "#{target_path}/#{File.basename(src_image)}"
+
+w, h =  `identify -format "%[fx:w]x%[fx:h]" #{src_image}`.split('x').map(&:to_i)
+
+long_edge = w > h ? w : h
+
+size = long_edge
+margin = (ARGV[1] || default_margin).to_i
+
+nm = margin * long_edge / 1080
+
+puts nm
+
+image_size = size - (nm * 2)
+
+`convert #{src_image} -resize #{image_size}x#{image_size} -gravity center -background white -extent #{size}x#{size} -colorspace sRGB -sampling-factor 2x2,1x1,1x1 -quality #{quality} #{target_file}`
+`open #{target_path}`
+
+

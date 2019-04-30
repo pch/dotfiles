@@ -1,6 +1,5 @@
 cask_args appdir: '/Applications'
 
-tap 'caskroom/cask'
 tap 'homebrew/bundle'
 
 brew 'the_silver_searcher'
@@ -14,11 +13,8 @@ brew 'imagemagick'
 brew 'git'
 brew 'readline'
 brew 'postgresql'
-brew 'ruby-build'
-brew 'rbenv'
 brew 'unrar'
 brew 'redis'
 brew 'z'
-
-cask 'transmission'
-cask 'vlc'
+brew 'chruby'
+brew 'ruby-install'

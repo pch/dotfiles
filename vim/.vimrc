@@ -183,7 +183,11 @@ let base16colorspace=256  " Access colors present in 256 colorspace
 set t_Co=256 " 256 color mode
 
 set background=dark
-colorscheme base16-tomorrow-night
+
+if filereadable(expand("~/.vimrc_background"))
+  let base16colorspace=256
+  source ~/.vimrc_background
+endif
 
 augroup vimrcEx
   autocmd!

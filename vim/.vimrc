@@ -136,6 +136,9 @@ nnoremap <silent> <Leader>l :TestLast<CR>
 nnoremap <silent> <Leader>a :TestSuite<CR>
 nnoremap <silent> <leader>gt :TestVisit<CR>
 
+" Map Ctrl + p to open fuzzy find (FZF)
+nnoremap <Leader>f :Files<cr>
+
 " ctrlp config
 let g:ctrlp_map = '<leader>f'
 let g:ctrlp_max_height = 30
@@ -164,19 +167,13 @@ if executable('ag')
   " Use Ag over Grep
   set grepprg=ag\ --nogroup\ --nocolor
 
-  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-  let g:ctrlp_user_command = 'ag -Q -l --nocolor --hidden -g "" %s'
+  " Use ag in fzf for listing files. Lightning fast and respects .gitignore
+  let $FZF_DEFAULT_COMMAND = 'ag --literal --files-with-matches --nocolor --hidden -g ""'
 
-  " ag is fast enough that CtrlP doesn't need to cache
-  let g:ctrlp_use_caching = 0
-
-  " bind K to grep word under cursor
-  nnoremap K :Ag --vimgrep "\b<C-R><C-W>\b"<CR>:cw<CR>
-
-  " bind \ (backward slash) to grep shortcut
-  command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
-
-  nnoremap \ :Ag<SPACE>
+  if !exists(":Ag")
+    command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
+    nnoremap \ :Ag<SPACE>
+  endif
 endif
 
 let base16colorspace=256  " Access colors present in 256 colorspace

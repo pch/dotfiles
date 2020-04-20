@@ -91,10 +91,11 @@ set splitright
 " unmap ex mode: 'Type visual to go into Normal mode.'
 nnoremap Q <nop>
 
-" paste lines from unnamed register and fix indentation
+" paste lines from the system register and fix indentation
 nmap <leader>p "*pV`]=
 nmap <leader>P "*PV`]=
 
+" paste lines from the unnamed register and fix indentation
 nmap <leader>pp pV`]=
 nmap <leader>PP PV`]=
 

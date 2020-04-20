@@ -137,8 +137,11 @@ nnoremap <silent> <Leader>l :TestLast<CR>
 nnoremap <silent> <Leader>a :TestSuite<CR>
 nnoremap <silent> <leader>gt :TestVisit<CR>
 
-" Map Ctrl + p to open fuzzy find (FZF)
+" Map ,f to open fuzzy find (FZF)
 nnoremap <Leader>f :Files<cr>
+
+" Map ,b fo open fuzzy find for open buffers
+nnoremap <Leader>b :Buffers<cr>
 
 " ctrlp config
 let g:ctrlp_map = '<leader>f'

@@ -127,27 +127,11 @@ if filereadable(expand("~/.vimrc.bundles"))
   source ~/.vimrc.bundles
 endif
 
-" rspec runner
-let g:rspec_runner = "os_x_iterm2"
-
-let test#strategy = "iterm"
-nnoremap <silent> <Leader>t :TestFile<CR>
-nnoremap <silent> <Leader>s :TestNearest<CR>
-nnoremap <silent> <Leader>l :TestLast<CR>
-nnoremap <silent> <Leader>a :TestSuite<CR>
-nnoremap <silent> <leader>gt :TestVisit<CR>
-
 " Map ,f to open fuzzy find (FZF)
 nnoremap <Leader>f :Files<cr>
 
 " Map ,b fo open fuzzy find for open buffers
 nnoremap <Leader>b :Buffers<cr>
-
-" ctrlp config
-let g:ctrlp_map = '<leader>f'
-let g:ctrlp_max_height = 30
-let g:ctrlp_working_path_mode = 0
-let g:ctrlp_match_window_reversed = 0
 
 " airline options
 " let g:airline_powerline_fonts=1

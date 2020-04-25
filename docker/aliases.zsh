@@ -1,5 +1,5 @@
 
-alias dcom="docker-compose $*"
+alias dcom="docker-compose"
 alias docker-cleanup="docker system prune -a --volumes"
 
 function docker-nuke() {

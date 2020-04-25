@@ -200,6 +200,9 @@ augroup vimrcEx
 
   " Allow stylesheets to autocomplete hyphenated words
   autocmd FileType css,scss,sass setlocal iskeyword+=-
+
+  " Always open quickfix window at the bottom
+  autocmd FileType qf wincmd J
 augroup END
 
 " MULTIPURPOSE TAB KEY

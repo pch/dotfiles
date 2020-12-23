@@ -21,6 +21,11 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'bling/vim-bufferline'
 Plug 'vim-ruby/vim-ruby'
+Plug 'pangloss/vim-javascript'
+Plug 'pbrisbin/vim-mkdir'
+Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
+Plug 'maxmellon/vim-jsx-pretty'
+Plug 'dense-analysis/ale'
 
 call plug#end()
 

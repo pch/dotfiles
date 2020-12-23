@@ -12,6 +12,7 @@ set ruler         " show the cursor position all the time
 set showcmd       " display incomplete commands
 set laststatus=2  " Always display the status line
 set timeout timeoutlen=1000 ttimeoutlen=101 " fast insert with "O"
+set cursorline
 
 " Backups (stolen from Steve Losh)
 set backup                        " enable backups
@@ -187,6 +188,14 @@ augroup vimrcEx
 
   " Set syntax highlighting for specific file types
   autocmd BufRead,BufNewFile *.md set filetype=markdown
+  autocmd BufRead,BufNewFile .{jscs,jshint,eslint}rc set filetype=json
+  autocmd BufNewFile,BufRead *.jsx set filetype=javascript.jsx
+  autocmd BufRead,BufNewFile aliases.local,zshrc.local,*/zsh/configs/* set filetype=sh
+  autocmd BufRead,BufNewFile gitconfig.local set filetype=gitconfig
+
+  " Fix out-of-sync syntax highlighting in JS files
+  autocmd BufEnter *.{js,jsx,ts,tsx} :syntax sync fromstart
+  autocmd BufLeave *.{js,jsx,ts,tsx} :syntax sync clear
 
   " Enable spellchecking for Markdown
   autocmd FileType markdown setlocal spell
@@ -204,6 +213,32 @@ augroup vimrcEx
   " Always open quickfix window at the bottom
   autocmd FileType qf wincmd J
 augroup END
+
+" ALE linting events
+augroup ale
+  autocmd!
+
+  autocmd VimEnter *
+        \ set updatetime=1000 |
+        \ let g:ale_lint_on_text_changed = 0
+  autocmd CursorHold * call ale#Queue(0)
+  autocmd CursorHoldI * call ale#Queue(0)
+  autocmd InsertEnter * call ale#Queue(0)
+  autocmd InsertLeave * call ale#Queue(0)
+augroup END
+
+" Move between linting errors
+nnoremap ]r :ALENextWrap<CR>
+nnoremap [r :ALEPreviousWrap<CR>
+
+let g:ale_fixers = {
+\   'javascript': ['prettier'],
+\}
+let g:ale_linters = {'javascript': ['prettier', 'eslint']}
+let g:ale_fix_on_save = 1
+" Only run linters named in ale_linters settings.
+let g:ale_linters_explicit = 1
+let g:ale_cache_executable_check_failures = 1
 
 " MULTIPURPOSE TAB KEY
 " Indent if we're at the beginning of a line. Else, do completion.

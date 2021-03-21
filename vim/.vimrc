@@ -112,6 +112,9 @@ nmap <leader>cl :let @*=expand("%:p")<CR>
 nnoremap Q gqip
 vnoremap Q gq
 
+" Quick save
+nmap <leader>s :update<CR>
+
 " display trailing whitespace
 set list listchars=tab:»·,trail:·,nbsp:·
 

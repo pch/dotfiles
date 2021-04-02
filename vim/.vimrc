@@ -234,10 +234,8 @@ augroup END
 nnoremap ]r :ALENextWrap<CR>
 nnoremap [r :ALEPreviousWrap<CR>
 
-let g:ale_fixers = {
-\   'javascript': ['prettier'],
-\}
-let g:ale_linters = {'javascript': ['prettier', 'eslint']}
+let g:ale_linters = {'javascript': ['prettier', 'eslint'], 'typescript': ['tsserver', 'eslint'], 'typescript.tsx': ['tsserver', 'eslint']}
+let g:ale_fixers = {'javascript': ['prettier'], 'typescript': ['prettier'], 'typescript.tsx': ['prettier']}
 let g:ale_fix_on_save = 1
 " Only run linters named in ale_linters settings.
 let g:ale_linters_explicit = 1

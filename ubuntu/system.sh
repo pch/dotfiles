@@ -34,7 +34,8 @@ sudo apt-get update && sudo apt-get install -y \
   jq \
   bat \
   htop \
-  rsync
+  rsync \
+  fail2ban
 
 sudo service ntp start
 
@@ -74,6 +75,9 @@ sudo chmod +x /usr/local/bin/docker-compose
 curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
 sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
 rm ./kubectl
+
+sudo ufw deny http
+sudo ufw deny https
 
 echo
 echo "Done!"

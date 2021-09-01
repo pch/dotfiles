@@ -145,6 +145,7 @@ let g:airline_theme='base16'
 
 " Disable annoying markdown folding
 let g:vim_markdown_folding_disabled = 1
+let g:vim_markdown_frontmatter = 1
 
 " ctags
 set tags+=.git/tags
@@ -202,8 +203,9 @@ augroup vimrcEx
   autocmd BufEnter *.{js,jsx,ts,tsx} :syntax sync fromstart
   autocmd BufLeave *.{js,jsx,ts,tsx} :syntax sync clear
 
-  " Enable spellchecking for Markdown
-  autocmd FileType markdown setlocal spell
+  " Wrap lines in markdown files
+  autocmd FileType markdown setlocal wrap
+  autocmd FileType markdown setlocal linebreak
 
   " Automatically wrap at 80 characters for Markdown
   " autocmd BufRead,BufNewFile *.md setlocal textwidth=80

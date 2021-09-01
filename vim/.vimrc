@@ -157,10 +157,15 @@ vmap <TAB> >gv
 " Use one space, not two, after punctuation.
 set nojoinspaces
 
-nnoremap \ :Rg<SPACE>
+if executable('rg')
+  " Use rg in fzf for listing files. Lightning fast and respects .gitignore
+  let $FZF_DEFAULT_COMMAND = 'RIPGREP_CONFIG_PATH=~/.ripgreprc rg --files'
 
-" Search for word under cursor
-nnoremap <silent> <Leader>rg :Rg <C-R><C-W><CR>
+  nnoremap \ :Rg<SPACE>
+
+  " Search for word under cursor
+  nnoremap <silent> <Leader>rg :Rg <C-R><C-W><CR>
+endif
 
 let base16colorspace=256  " Access colors present in 256 colorspace
 set t_Co=256 " 256 color mode

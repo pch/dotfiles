@@ -1,0 +1,16 @@
+# Search hidden files and directories
+--hidden
+
+# Follow symbolic links
+--follow
+
+# Add my 'web' type.
+--type-add
+web:*.{html,css,js}*
+
+# Exclude directories
+--glob=!{.git,.svn,.tldr,node_modules,Trash,vendor}
+
+# Because who cares about case!?
+--smart-case
+

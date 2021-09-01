@@ -27,6 +27,7 @@ Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
 Plug 'maxmellon/vim-jsx-pretty'
 Plug 'quramy/tsuquyomi'
 Plug 'dense-analysis/ale'
+Plug 'plasticboy/vim-markdown'
 
 call plug#end()
 

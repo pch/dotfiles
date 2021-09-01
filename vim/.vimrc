@@ -143,7 +143,10 @@ let g:airline_left_sep=''
 let g:airline_right_sep=''
 let g:airline_theme='base16'
 
-"" ctags
+" Disable annoying markdown folding
+let g:vim_markdown_folding_disabled = 1
+
+" ctags
 set tags+=.git/tags
 map <Leader>rt :!ctags --tag-relative --extra=+f -Rf.git/tags --exclude=.git,pkg --languages=-javascript,sql<CR><CR>
 
@@ -154,19 +157,10 @@ vmap <TAB> >gv
 " Use one space, not two, after punctuation.
 set nojoinspaces
 
-" Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
-if executable('ag')
-  " Use Ag over Grep
-  set grepprg=ag\ --nogroup\ --nocolor
+nnoremap \ :Rg<SPACE>
 
-  " Use ag in fzf for listing files. Lightning fast and respects .gitignore
-  let $FZF_DEFAULT_COMMAND = 'ag --literal --files-with-matches --nocolor --hidden -g ""'
-
-  if !exists(":Ag")
-    command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
-    nnoremap \ :Ag<SPACE>
-  endif
-endif
+" Search for word under cursor
+nnoremap <silent> <Leader>rg :Rg <C-R><C-W><CR>
 
 let base16colorspace=256  " Access colors present in 256 colorspace
 set t_Co=256 " 256 color mode

@@ -295,3 +295,28 @@ abbr funciton function
 abbr teh the
 abbr tempalte template
 abbr fitler filter
+
+" Stolen from @sirupsen
+function! ZettelkastenSetup()
+  if expand("%:t") !~ '^[0-9]\+'
+    return
+  endif
+
+  " Upon entering [[, search available notes with fzf
+  " Strips directory & extension from filename
+  inoremap <expr> <plug>(fzf-complete-path-custom) fzf#vim#complete#path("rg --files -t md \| sed -E 's/^[^0-9]+\\\///' \| sed 's/^/[[/g' \| sed 's/$/]]/' \| sed 's/.md//'")
+  imap <buffer> [[ <plug>(fzf-complete-path-custom)
+endfunction
+
+autocmd BufNew,BufNewFile,BufRead ~/Documents/Notes/*.md call ZettelkastenSetup()
+
+" Search file by name: used to jump to links within text
+command! -nargs=* -bang FilesF call fzf#vim#files('.', {'options':'-1 --query '.shellescape(<q-args>)})
+
+" Jump to file within [[Bracket link]]
+nnoremap <silent> <leader>jj yi[:FilesF<SPACE><C-R>"<CR>
+
+" Create a new note in Inbox
+command! -nargs=1 NewZettel :execute ":e ./Inbox/" . strftime("%Y%m%d%H%M") . " <args>.md"
+nnoremap <leader>nz :NewZettel
+

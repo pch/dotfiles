@@ -190,6 +190,9 @@ augroup vimrcEx
   autocmd BufRead,BufNewFile aliases.local,zshrc.local,*/zsh/configs/* set filetype=sh
   autocmd BufRead,BufNewFile gitconfig.local set filetype=gitconfig
 
+  autocmd BufNewFile,BufRead *.tsx set filetype=typescript.tsx
+  autocmd BufNewFile,BufRead *.jsx set filetype=javascript.jsx
+
   " Fix out-of-sync syntax highlighting in JS files
   autocmd BufEnter *.{js,jsx,ts,tsx} :syntax sync fromstart
   autocmd BufLeave *.{js,jsx,ts,tsx} :syntax sync clear
@@ -198,7 +201,7 @@ augroup vimrcEx
   autocmd FileType markdown setlocal spell
 
   " Automatically wrap at 80 characters for Markdown
-  autocmd BufRead,BufNewFile *.md setlocal textwidth=80
+  " autocmd BufRead,BufNewFile *.md setlocal textwidth=80
 
   " Automatically wrap at 72 characters and spell check git commit messages
   autocmd FileType gitcommit setlocal textwidth=72

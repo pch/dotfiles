@@ -8,6 +8,9 @@
 #
 set -e
 
+git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+~/.fzf/install
+
 # Dotfiles & colors
 git clone https://github.com/chriskempson/base16-shell.git ~/.config/base16-shell
 git clone https://github.com/pch/dotfiles.git ~/.dotfiles

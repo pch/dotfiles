@@ -29,7 +29,6 @@ sudo apt-get update && sudo apt-get install -y \
   logrotate \
   build-essential \
   zsh \
-  fzf \
   silversearcher-ag \
   jq \
   bat \

@@ -160,7 +160,7 @@ set nojoinspaces
 
 if executable('rg')
   " Use rg in fzf for listing files. Lightning fast and respects .gitignore
-  let $FZF_DEFAULT_COMMAND = 'RIPGREP_CONFIG_PATH=~/.ripgreprc rg --files'
+  let $FZF_DEFAULT_COMMAND = 'rg --files'
 
   nnoremap \ :Rg<SPACE>
 

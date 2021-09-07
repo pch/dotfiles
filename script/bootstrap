@@ -134,6 +134,9 @@ install_dotfiles () {
     dst="$HOME/$(basename "${src}")"
     link_file "$src" "$dst"
   done
+
+  mkdir -p "$HOME/.config"
+  link_file "$DOTFILES_ROOT/vim/nvim" "$HOME/.config/nvim"
 }
 
 setup_gitconfig

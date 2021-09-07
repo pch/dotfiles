@@ -63,7 +63,7 @@ set smartcase                   " ... unless they contain at least one capital l
 set mouse=a
 
 " set guifont=DejaVu\ Sans\ Mono:h12
-set guifont=Fira\ Mono:h12
+" set guifont=Fira\ Mono:h12
 
 let mapleader=","
 
@@ -220,30 +220,6 @@ augroup vimrcEx
   " Always open quickfix window at the bottom
   autocmd FileType qf wincmd J
 augroup END
-
-" ALE linting events
-augroup ale
-  autocmd!
-
-  autocmd VimEnter *
-        \ set updatetime=1000 |
-        \ let g:ale_lint_on_text_changed = 0
-  autocmd CursorHold * call ale#Queue(0)
-  autocmd CursorHoldI * call ale#Queue(0)
-  autocmd InsertEnter * call ale#Queue(0)
-  autocmd InsertLeave * call ale#Queue(0)
-augroup END
-
-" Move between linting errors
-nnoremap ]r :ALENextWrap<CR>
-nnoremap [r :ALEPreviousWrap<CR>
-
-let g:ale_linters = {'javascript': ['prettier', 'eslint'], 'typescript': ['tsserver', 'eslint'], 'typescript.tsx': ['tsserver', 'eslint']}
-let g:ale_fixers = {'javascript': ['prettier'], 'typescript': ['prettier'], 'typescript.tsx': ['prettier']}
-let g:ale_fix_on_save = 1
-" Only run linters named in ale_linters settings.
-let g:ale_linters_explicit = 1
-let g:ale_cache_executable_check_failures = 1
 
 " MULTIPURPOSE TAB KEY
 " Indent if we're at the beginning of a line. Else, do completion.

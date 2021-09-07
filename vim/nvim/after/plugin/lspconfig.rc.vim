@@ -114,9 +114,9 @@ nvim_lsp.diagnosticls.setup {
           security = 'severity'
         },
         securities = {
-          [2] = 'error',
-          [1] = 'warning'
-        }
+          ['2'] = 'error',
+          ['1'] = 'warning'
+        },
       },
     },
     filetypes = {

@@ -89,12 +89,12 @@ nvim_lsp.flow.setup {
 
 nvim_lsp.tsserver.setup {
   on_attach = on_attach,
-  filetypes = { "typescript", "typescriptreact", "typescript.tsx" }
+  filetypes = { "typescript", "typescriptreact" }
 }
 
 nvim_lsp.diagnosticls.setup {
   on_attach = on_attach,
-  filetypes = { 'javascript', 'javascriptreact', 'json', 'typescript', 'typescriptreact', 'typescript.tsx', 'javascript.jsx', 'css', 'less', 'scss', 'markdown', 'pandoc' },
+  filetypes = { 'javascript', 'javascriptreact', 'json', 'typescript', 'typescriptreact', 'css', 'less', 'scss', 'markdown', 'pandoc' },
   -- root_dir = util.root_pattern('node_modules', 'package.json'),
   init_options = {
     linters = {
@@ -143,13 +143,11 @@ nvim_lsp.diagnosticls.setup {
       css = 'prettier',
       javascript = 'eslint_d',
       javascriptreact = 'eslint_d',
-      ['javascript.jsx'] = 'eslint_d',
       json = 'prettier',
       scss = 'prettier',
       less = 'prettier',
       typescript = 'eslint_d',
       typescriptreact = 'eslint_d',
-      ['typescript.tsx'] = 'eslint_d',
       json = 'prettier',
       markdown = 'prettier',
     }

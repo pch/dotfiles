@@ -192,16 +192,8 @@ augroup vimrcEx
   " Set syntax highlighting for specific file types
   autocmd BufRead,BufNewFile *.md set filetype=markdown
   autocmd BufRead,BufNewFile .{jscs,jshint,eslint}rc set filetype=json
-  autocmd BufNewFile,BufRead *.jsx set filetype=javascript.jsx
   autocmd BufRead,BufNewFile aliases.local,zshrc.local,*/zsh/configs/* set filetype=sh
   autocmd BufRead,BufNewFile gitconfig.local set filetype=gitconfig
-
-  autocmd BufNewFile,BufRead *.tsx set filetype=typescript.tsx
-  autocmd BufNewFile,BufRead *.jsx set filetype=javascript.jsx
-
-  " Fix out-of-sync syntax highlighting in JS files
-  autocmd BufEnter *.{js,jsx,ts,tsx} :syntax sync fromstart
-  autocmd BufLeave *.{js,jsx,ts,tsx} :syntax sync clear
 
   " Wrap lines in markdown files
   autocmd FileType markdown setlocal wrap

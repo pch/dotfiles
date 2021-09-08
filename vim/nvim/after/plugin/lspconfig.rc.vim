@@ -122,10 +122,8 @@ nvim_lsp.diagnosticls.setup {
     filetypes = {
       javascript = 'eslint',
       javascriptreact = 'eslint',
-      ['javascript.jsx'] = 'eslint',
       typescript = 'eslint',
       typescriptreact = 'eslint',
-      ['typescript.tsx'] = 'eslint',
     },
     formatters = {
       eslint_d = {

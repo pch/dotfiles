@@ -157,6 +157,10 @@ if filereadable(expand("~/.vimrc_background"))
   source ~/.vimrc_background
 endif
 
+if executable("rg")
+  set grepprg=rg\ --vimgrep
+endif
+
 augroup vimrcEx
   autocmd!
 
@@ -191,6 +195,13 @@ augroup vimrcEx
 
   " Always open quickfix window at the bottom
   autocmd FileType qf wincmd J
+augroup END
+
+" Automatically open quickfix after :grep
+augroup myvimrc
+  autocmd!
+  autocmd QuickFixCmdPost [^l]* cwindow
+  autocmd QuickFixCmdPost l*    lwindow
 augroup END
 
 " MULTIPURPOSE TAB KEY

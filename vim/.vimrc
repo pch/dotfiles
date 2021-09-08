@@ -22,9 +22,9 @@ set history=1000
 set undofile
 set undoreload=10000
 
-set undodir=~/.vim/tmp/undo//     " undo files
-set backupdir=~/.vim/tmp/backup// " backups
-set directory=~/.vim/tmp/swap//   " swap files
+set undodir=~/.vim/tmp/undo/     " undo files
+set backupdir=~/.vim/tmp/backup/ " backups
+set directory=~/.vim/tmp/swap/   " swap files
 
 " Make those folders automatically if they don't already exist.
 if !isdirectory(expand(&undodir))
@@ -61,9 +61,6 @@ set smartcase                   " ... unless they contain at least one capital l
 
 " Mouse
 set mouse=a
-
-" set guifont=DejaVu\ Sans\ Mono:h12
-" set guifont=Fira\ Mono:h12
 
 let mapleader=","
 
@@ -119,8 +116,6 @@ nmap <leader>s :update<CR>
 set list listchars=tab:»·,trail:·,nbsp:·
 
 " remove traling whitespace on save
-" autocmd FileType rb,erb,html,css,js,coffee,sass,haml autocmd BufWritePre <buffer> :%s/\s\+$//e
-
 autocmd BufWritePre * :%s/\s\+$//e " the command above doesn't seem to work
 
 " no beeps!
@@ -196,8 +191,9 @@ augroup vimrcEx
   autocmd BufRead,BufNewFile gitconfig.local set filetype=gitconfig
 
   " Wrap lines in markdown files
-  autocmd FileType markdown setlocal wrap
-  autocmd FileType markdown setlocal linebreak
+  autocmd FileType markdown setlocal textwidth=0
+  autocmd FileType markdown setlocal wrap linebreak
+  autocmd FileType markdown setlocal nonumber norelativenumber
 
   " Automatically wrap at 80 characters for Markdown
   " autocmd BufRead,BufNewFile *.md setlocal textwidth=80
@@ -249,7 +245,7 @@ map <leader>n :call RenameFile()<cr>
 
 " save current file in a new location, without deleting the original
 function! CopyFile()
-    let new_name = input('New file name: ', expand('%'), 'file')
+    let new_name = input('Copy file to: ', expand('%'), 'file')
     if new_name != ''
         call MkNonExDir(new_name)
         exec ':saveas ' . new_name

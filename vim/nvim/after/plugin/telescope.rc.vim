@@ -6,6 +6,10 @@ nnoremap <silent> <leader>gs <cmd>Telescope grep_string<cr>
 nnoremap <silent> \\ <cmd>Telescope buffers<cr>
 nnoremap <silent> ;; <cmd>Telescope help_tags<cr>
 
+" find files within [[links]] (notes)
+" doesn't allow to select first match, so I'm leaving fzf for now
+" nnoremap <silent> <leader>x yi[<cmd>Telescope find_files find_command=rg,--files,--ignore default_text=<C-R>"<CR>
+
 lua << EOF
 local actions = require('telescope.actions')
 -- Global remapping

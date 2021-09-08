@@ -22,7 +22,6 @@ require'nvim-treesitter.configs'.setup {
     "rust",
     "json",
     "yaml",
-    "swift",
     "html",
     "scss",
     "javascript"

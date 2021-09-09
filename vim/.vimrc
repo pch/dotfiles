@@ -73,6 +73,9 @@ nnoremap <Down> :echoe "Use j"<CR>
 " Switch between files by hitting ,, twice
 nnoremap <leader><leader> <c-^>
 
+" Make ctrl+c work exactly like <esc>
+inoremap <c-c> <esc>
+
 " Clear search results by hitting Enter
 nnoremap <CR> :noh<CR><CR>
 
@@ -198,7 +201,7 @@ augroup vimrcEx
 augroup END
 
 " Automatically open quickfix after :grep
-augroup myvimrc
+augroup quickfix
   autocmd!
   autocmd QuickFixCmdPost [^l]* cwindow
   autocmd QuickFixCmdPost l*    lwindow
@@ -260,6 +263,9 @@ function! ZettelkastenSetup()
   if expand("%:t") !~ '^[0-9]\+'
     return
   endif
+
+  syntax region mkdHl start="\^\^" end="\^\^" containedin=mkdNonListItemBlock,mkdListItemLine
+  hi mkdHl guifg=#536991 guibg=NONE guisp=NONE gui=bold ctermfg=yellow ctermbg=NONE
 
   " Upon entering [[, search available notes with fzf
   " Strips directory & extension from filename

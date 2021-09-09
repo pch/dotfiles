@@ -78,6 +78,18 @@ rm ./kubectl
 sudo ufw deny http
 sudo ufw deny https
 
+# Node
+curl -sL https://deb.nodesource.com/setup_14.x | sudo bash -
+sudo apt-get update
+sudo apt-get -y install nodejs
+
+sudo npm install -g \
+  typescript \
+  typescript-language-server \
+  diagnostic-languageserver \
+  eslint_d \
+  prettier
+
 echo
 echo "Done!"
 echo

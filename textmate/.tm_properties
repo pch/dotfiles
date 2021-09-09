@@ -31,7 +31,7 @@ tabSize          = 2
 #
 [ text ]
 showInvisibles   = true
-softWrap         = false
+softWrap         = true
 
 [ .git/COMMIT_EDITMSG ]
 spellChecking    = true

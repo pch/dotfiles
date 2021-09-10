@@ -13,6 +13,7 @@ set showcmd       " display incomplete commands
 set laststatus=2  " Always display the status line
 set timeout timeoutlen=1000 ttimeoutlen=101 " fast insert with "O"
 set cursorline
+set hidden
 
 " Backups (stolen from Steve Losh)
 set backup                        " enable backups

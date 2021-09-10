@@ -9,8 +9,7 @@
 web:*.{html,css,js}*
 
 # Exclude directories
---glob=!{.git,.svn,.tldr,node_modules,Trash,vendor}
+--glob=!{.git,.svn,.tldr,node_modules,Trash,vendor,.yarn,yarn.lock,Gemfile.lock}
 
 # Because who cares about case!?
 --smart-case
-

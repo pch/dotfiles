@@ -30,7 +30,8 @@ Plug 'plasticboy/vim-markdown'
 if has("nvim")
   Plug 'folke/lsp-colors.nvim'
   Plug 'nvim-lua/plenary.nvim'
-  Plug 'nvim-telescope/telescope.nvim'
+  " skip telescope for now, it's nice but slower than fzf
+  " Plug 'nvim-telescope/telescope.nvim'
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
   Plug 'neovim/nvim-lspconfig'
   Plug 'glepnir/lspsaga.nvim'

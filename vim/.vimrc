@@ -130,6 +130,12 @@ if filereadable(expand("~/.vimrc.bundles"))
   source ~/.vimrc.bundles
 endif
 
+" Map ,f to open fuzzy find (FZF)
+nnoremap <Leader>f :Files<cr>
+
+" Map ,b fo open fuzzy find for open buffers
+nnoremap <Leader>b :Buffers<cr>
+
 " airline options
 " let g:airline_powerline_fonts=1
 let g:airline_left_sep=''
@@ -150,6 +156,16 @@ vmap <TAB> >gv
 
 " Use one space, not two, after punctuation.
 set nojoinspaces
+
+if executable('rg')
+  " Use rg in fzf for listing files. Lightning fast and respects .gitignore
+  let $FZF_DEFAULT_COMMAND = 'rg --files'
+
+  nnoremap \ :Rg<SPACE>
+
+  " Search for word under cursor
+  nnoremap <silent> <Leader>rg :Rg <C-R><C-W><CR>
+endif
 
 let base16colorspace=256  " Access colors present in 256 colorspace
 set t_Co=256 " 256 color mode

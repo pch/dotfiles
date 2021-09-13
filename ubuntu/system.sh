@@ -34,7 +34,8 @@ sudo apt-get update && sudo apt-get install -y \
   bat \
   htop \
   rsync \
-  fail2ban
+  fail2ban \
+  exuberant-ctags
 
 sudo service ntp start
 

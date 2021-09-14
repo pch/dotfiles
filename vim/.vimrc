@@ -139,12 +139,6 @@ nnoremap <Leader>b :Buffers<cr>
 " Close all buffers except the current one
 command BufOnly silent! execute "%bd|e#|bd#"
 
-" airline options
-" let g:airline_powerline_fonts=1
-let g:airline_left_sep=''
-let g:airline_right_sep=''
-let g:airline_theme='base16'
-
 " Disable annoying markdown folding
 let g:vim_markdown_folding_disabled = 1
 let g:vim_markdown_frontmatter = 1

@@ -18,9 +18,6 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-endwise'
 Plug 'chriskempson/base16-vim'
 Plug 'janko-m/vim-test'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'bling/vim-bufferline'
 Plug 'vim-ruby/vim-ruby'
 Plug 'pangloss/vim-javascript'
 Plug 'pbrisbin/vim-mkdir'
@@ -38,6 +35,7 @@ if has("nvim")
   Plug 'nvim-lua/completion-nvim'
   Plug 'kyazdani42/nvim-web-devicons' " for file icons
   Plug 'kyazdani42/nvim-tree.lua'
+  Plug 'hoob3rt/lualine.nvim'
 endif
 
 call plug#end()

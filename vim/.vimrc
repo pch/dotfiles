@@ -120,7 +120,7 @@ nmap <leader>s :update<CR>
 set list listchars=tab:»·,trail:·,nbsp:·
 
 " remove traling whitespace on save
-autocmd BufWritePre * :%s/\s\+$//e " the command above doesn't seem to work
+autocmd BufWritePre * :%s/\s\+$//e
 
 " no beeps!
 set visualbell

@@ -136,6 +136,9 @@ nnoremap <Leader>f :Files<cr>
 " Map ,b fo open fuzzy find for open buffers
 nnoremap <Leader>b :Buffers<cr>
 
+" Close all buffers except the current one
+command BufOnly silent! execute "%bd|e#|bd#"
+
 " airline options
 " let g:airline_powerline_fonts=1
 let g:airline_left_sep=''

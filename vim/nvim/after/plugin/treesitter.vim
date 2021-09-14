@@ -7,7 +7,9 @@ lua <<EOF
 require'nvim-treesitter.configs'.setup {
   highlight = {
     enable = true,
-    disable = {},
+    disable = {
+      "ruby" -- because it breaks vim-endwise
+    },
   },
   indent = {
     enable = false,

@@ -19,7 +19,7 @@
         ui = true
 [core]
         excludesfile = ~/.gitignore
-        editor = 'vim'
+        editor = 'nvim'
 [apply]
         whitespace = nowarn
 [mergetool]
@@ -55,4 +55,4 @@
         changed = yellow
         untracked = blue
 [init]
-	templatedir = ~/.git_template
+        templatedir = ~/.git_template

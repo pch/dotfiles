@@ -279,7 +279,7 @@ function! ZettelkastenSetup()
   endif
 
   syntax region mkdHl start="\^\^" end="\^\^" containedin=mkdNonListItemBlock,mkdListItemLine
-  hi mkdHl guifg=#536991 guibg=NONE guisp=NONE gui=bold ctermfg=yellow ctermbg=NONE
+  hi mkdHl guifg=#ffe76b guibg=NONE guisp=NONE gui=bold ctermfg=yellow ctermbg=NONE
 
   " Upon entering [[, search available notes with fzf
   " Strips directory & extension from filename

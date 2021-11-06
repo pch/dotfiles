@@ -17,6 +17,8 @@ let g:completion_chain_complete_list = {
         \   }
         \}
 
+let g:completion_disable_filetypes = [ 'markdown' ]
+
 lua <<EOF
 local remap = vim.api.nvim_set_keymap
 local status, npairs = pcall(require, "nvim-autopairs")

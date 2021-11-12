@@ -10,6 +10,8 @@ lua << EOF
 local nvim_lsp = require('lspconfig')
 local protocol = require'vim.lsp.protocol'
 
+require'lspconfig'.solargraph.setup{}
+
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
@@ -94,7 +96,7 @@ nvim_lsp.tsserver.setup {
 
 nvim_lsp.diagnosticls.setup {
   on_attach = on_attach,
-  filetypes = { 'javascript', 'javascriptreact', 'json', 'typescript', 'typescriptreact', 'css', 'less', 'scss', 'markdown', 'pandoc' },
+  filetypes = { 'javascript', 'javascriptreact', 'json', 'typescript', 'typescriptreact', 'css', 'less', 'scss', 'markdown', 'ruby' },
   -- root_dir = util.root_pattern('node_modules', 'package.json'),
   init_options = {
     linters = {
@@ -124,6 +126,7 @@ nvim_lsp.diagnosticls.setup {
       javascriptreact = 'eslint',
       typescript = 'eslint',
       typescriptreact = 'eslint',
+      ruby = 'solargraph',
     },
     formatters = {
       eslint_d = {
@@ -148,6 +151,7 @@ nvim_lsp.diagnosticls.setup {
       typescriptreact = 'eslint_d',
       json = 'prettier',
       markdown = 'prettier',
+      ruby = 'solagraph',
     }
   }
 }

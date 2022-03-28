@@ -88,7 +88,7 @@ kube__bash() {
 
 # attach to the 'terminal' pod
 kube__term() {
-  local pod=$(kubectl get pods -o json | jq -r '.items[] .metadata.name' | grep '^terminal')
+  local pod=$(kubectl get pods -o json | jq -r '.items[] .metadata.name' | grep -m1 '^sh-production-deployment')
   kubectl exec -it $pod bash
 }
 

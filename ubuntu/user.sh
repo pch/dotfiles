@@ -18,11 +18,6 @@ cd .dotfiles
 script/bootstrap
 cd -
 
-# DigitalOcean
-sudo snap install doctl
-sudo snap connect doctl:kube-config
-doctl auth init
-
 # vim-plug
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -30,3 +25,15 @@ curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
 source ~/.zshrc
 
 base16_tomorrow-night
+
+# ssh agent forwarding fix for tmux
+cat > ~/.ssh/rc <<EOF
+if [ ! -S ~/.ssh/ssh_auth_sock ] && [ -S "\$SSH_AUTH_SOCK" ]; then
+  ln -sf \$SSH_AUTH_SOCK ~/.ssh/ssh_auth_sock
+fi
+EOF
+
+# DigitalOcean
+sudo snap install doctl
+sudo snap connect doctl:kube-config
+doctl auth init

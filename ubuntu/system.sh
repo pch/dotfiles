@@ -91,6 +91,11 @@ sudo npm install -g \
   eslint_d \
   prettier
 
+# Fix "Visual Studio Code is unable to watch for file changes in this large workspace"
+# https://code.visualstudio.com/docs/setup/linux#_visual-studio-code-is-unable-to-watch-for-file-changes-in-this-large-workspace-error-enospc
+echo "fs.inotify.max_user_watches=524288" | sudo tee -a /etc/sysctl.conf
+sudo sysctl -p
+
 echo
 echo "Done!"
 echo

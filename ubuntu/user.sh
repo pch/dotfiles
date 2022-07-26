@@ -28,7 +28,9 @@ base16_tomorrow-night
 
 # ssh agent forwarding fix for tmux
 cat > ~/.ssh/rc <<EOF
-if [ ! -S ~/.ssh/ssh_auth_sock ] && [ -S "\$SSH_AUTH_SOCK" ]; then
+#!/bin/bash
+
+if test "\$SSH_AUTH_SOCK" ; then
   ln -sf \$SSH_AUTH_SOCK ~/.ssh/ssh_auth_sock
 fi
 EOF

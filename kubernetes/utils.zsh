@@ -83,13 +83,7 @@ kube__lsc() {
 
 # attach to pod, run bash (select name with fzf)
 kube__bash() {
-  kubectl exec -it $(kube__pod) bash
-}
-
-# attach to the 'terminal' pod
-kube__term() {
-  local pod=$(kubectl get pods -o json | jq -r '.items[] .metadata.name' | grep -m1 '^sh-production-deployment')
-  kubectl exec -it $pod bash
+  kubectl exec -it $(kube__pod) -- bash
 }
 
 # describe pod (select name with fzf)

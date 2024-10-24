@@ -61,6 +61,9 @@ sudo sed -i -e "s/PermitRootLogin.*/PermitRootLogin no/" /etc/ssh/sshd_config
 sudo sed -i -e "s/PasswordAuthentication.*/PasswordAuthentication no/" /etc/ssh/sshd_config
 sudo service ssh restart
 
+# be sure to set up sshd in fail2ban (backend = systemd)
+cp /etc/fail2ban/jail.conf /etc/fail2ban/jail.local
+
 # Install docker & docker-compose
 sudo apt-get install -y apt-transport-https ca-certificates curl software-properties-common
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -

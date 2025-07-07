@@ -1,5 +1,4 @@
 
-alias dcom="docker compose"
 alias docker-cleanup="docker system prune -a --volumes"
 
 function docker-nuke() {
@@ -9,4 +8,3 @@ function docker-nuke() {
   docker volume rm $(docker volume ls -q) && \
   docker network rm $(docker network ls -q)
 }
-

@@ -1,0 +1,73 @@
+#!/bin/bash
+set -euo pipefail
+
+BATTERY_THRESHOLD=10
+NOTIFICATION_FLAG="/run/user/$UID/battery_notified"
+
+# Get battery percentage as integer
+get_remaining() {
+  upower -i "$(upower -e | grep BAT)" |
+    awk -F: '/percentage/ {
+      gsub(/[%[:space:]]/, "", $2);
+      val=$2;
+      printf("%d\n", (val+0.5))
+      exit
+    }'
+}
+
+# Monitor battery and alert if low (designed for systemd timer)
+monitor() {
+  local battery_level battery_state
+
+  battery_level=$(get_remaining)
+  battery_state=$(upower -i "$(upower -e | grep 'BAT')" | grep -E "state" | awk '{print $2}')
+
+  if [[ $battery_state == "discharging" && $battery_level -le $BATTERY_THRESHOLD ]]; then
+    if [[ ! -f $NOTIFICATION_FLAG ]]; then
+      notify-send -u critical "󱐋 Time to recharge!" "Battery is down to ${battery_level}%" -i battery-caution -t 30000
+      touch $NOTIFICATION_FLAG
+    fi
+  else
+    rm -f $NOTIFICATION_FLAG
+  fi
+}
+
+# Show usage
+usage() {
+  cat <<EOF
+Usage: battery [COMMAND]
+
+Commands:
+  (no command)      Show battery percentage remaining (default)
+  remaining         Show battery percentage remaining
+  monitor           Monitor battery and send low battery alerts
+  help              Show this help message
+
+Examples:
+  battery                 # Show battery percentage
+  battery remaining       # Show battery percentage
+  battery monitor         # Run battery monitor (used by systemd)
+EOF
+}
+
+# Main command dispatcher
+main() {
+  case "${1:-}" in
+  "" | remaining)
+    get_remaining
+    ;;
+  monitor)
+    monitor
+    ;;
+  help | --help | -h)
+    usage
+    ;;
+  *)
+    echo "Error: unknown command '$1'"
+    usage
+    exit 1
+    ;;
+  esac
+}
+
+main "$@"

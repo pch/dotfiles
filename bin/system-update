@@ -1,0 +1,18 @@
+#!/bin/bash
+set -euo pipefail
+
+# Create pre-update snapshots
+system-snapshot create
+
+# Run system update
+yay -Syu "$@"
+
+echo ""
+echo "Update complete!"
+
+# Show snapshot info if snapper is available
+if command -v snapper &>/dev/null; then
+  echo ""
+  echo "Recent snapshots:"
+  sudo snapper list | tail -6
+fi

@@ -1,0 +1,12 @@
+*.log
+*.bak
+config/.config/systemd/user/default.target.wants
+config/.config/fcitx5/conf/cached_layouts
+config/.config/zsh/.zcompdump
+
+config/.config/nvim/lazy-lock.json
+config/.config/nvim/lua/plugins/theme.lua
+
+# Ignore everything in gnupg directory except .conf files
+config/.config/gnupg/*
+!config/.config/gnupg/*.conf

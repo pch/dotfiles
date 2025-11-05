@@ -1,0 +1,128 @@
+#!/bin/bash
+set -euo pipefail
+
+# Get current font
+get_current() {
+  grep -oP 'font-family:\s*["'\'']?\K[^;"'\'']+' ~/.config/waybar/style.css | head -n1
+}
+
+# List all available monospace fonts
+list_fonts() {
+  fc-list :spacing=100 -f "%{family[0]}\n" | grep -v -i -E 'emoji|signwriting|omarchy' | sort -u
+}
+
+# Set a new font
+set_font() {
+  local font_name="$1"
+
+  if [[ -z "$font_name" || "$font_name" == "CNCLD" ]]; then
+    echo "Error: font name required"
+    echo "Usage: system-font set <font-name>"
+    exit 1
+  fi
+
+  if ! fc-list | grep -iq "$font_name"; then
+    echo "Font '$font_name' not found."
+    exit 1
+  fi
+
+  # Update kitty config
+  if [[ -f ~/.config/kitty/kitty.conf ]]; then
+    sed -i "s/^font_family .*/font_family $font_name/g" ~/.config/kitty/kitty.conf
+    pkill -USR1 kitty 2>/dev/null || true
+  fi
+
+  # Update ghostty config
+  if [[ -f ~/.config/ghostty/config ]]; then
+    sed -i "s/font-family = \".*\"/font-family = \"$font_name\"/g" ~/.config/ghostty/config
+    pkill -SIGUSR2 ghostty 2>/dev/null || true
+  fi
+
+  # Update waybar and swayosd
+  sed -i "s/font-family: .*/font-family: '$font_name';/g" ~/.config/waybar/style.css
+  sed -i "s/font-family: .*/font-family: '$font_name';/g" ~/.config/swayosd/style.css
+
+  # Update fontconfig
+  xmlstarlet ed -L \
+    -u '//match[@target="pattern"][test/string="monospace"]/edit[@name="family"]/string' \
+    -v "$font_name" \
+    ~/.config/fontconfig/fonts.conf
+
+  # Restart services
+  restart-app waybar 2>/dev/null || true
+  restart-app swayosd-server 2>/dev/null || true
+  restart-walker 2>/dev/null || true
+
+  echo "Font set to: $font_name"
+}
+
+# Install a font package and set it
+install_font() {
+  local display_name="$1"
+  local package_name="$2"
+  local font_name="$3"
+
+  echo "Installing $display_name..."
+  sudo pacman -S --noconfirm --needed "$package_name"
+  sleep 2
+  set_font "$font_name"
+}
+
+# Show usage
+usage() {
+  cat <<EOF
+Usage: system-font [COMMAND] [ARGS]
+
+Commands:
+  (no command)      Show current font
+  list              List all available monospace fonts
+  set <name>        Set a new font
+  install <display-name> <package> <font-name>
+                    Install a font package and set it
+  help              Show this help message
+
+Examples:
+  system-font                                    # Show current font
+  system-font list                               # List fonts
+  system-font set "JetBrains Mono"               # Set font
+  system-font install "Fira Code" "ttf-firacode-nerd" "FiraCode Nerd Font"
+EOF
+}
+
+# Main command dispatcher
+main() {
+  case "${1:-}" in
+  "")
+    get_current
+    ;;
+  list)
+    list_fonts
+    ;;
+  set)
+    if [[ -z "${2:-}" ]]; then
+      echo "Error: font name required"
+      echo "Usage: system-font set <font-name>"
+      exit 1
+    fi
+    set_font "$2"
+    ;;
+  install)
+    if [[ -z "${2:-}" || -z "${3:-}" || -z "${4:-}" ]]; then
+      echo "Error: install requires 3 arguments"
+      echo "Usage: system-font install <display-name> <package> <font-name>"
+      exit 1
+    fi
+    install_font "$2" "$3" "$4"
+    ;;
+  help | --help | -h)
+    usage
+    ;;
+  *)
+    echo "Error: unknown command '$1'"
+    usage
+    exit 1
+    ;;
+  esac
+}
+
+main "$@"

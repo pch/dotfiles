@@ -1,0 +1,9 @@
+[Unit]
+Description=Battery Monitor Check
+After=graphical-session.target
+
+[Service]
+Type=oneshot
+ExecStart=%h/.local/share/dotfiles/bin/battery monitor
+Environment=DISPLAY=:0
+LogLevelMax=warning

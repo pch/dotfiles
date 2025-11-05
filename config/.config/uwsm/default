@@ -1,0 +1,9 @@
+# Changes require a restart to take effect.
+export TERMINAL=ghostty
+export EDITOR=nvim
+
+# Use a custom directory for screenshots (remember to make the directory!)
+# export SCREENSHOTS_DIR="$HOME/Pictures/Screenshots"
+
+# Use a custom directory for screenrecordings (remember to make the directory!)
+# export SCREENRECORDS_DIR="$HOME/Videos/Screencasts"

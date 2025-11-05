@@ -1,0 +1,96 @@
+#!/bin/bash
+set -euo pipefail
+
+show_done() {
+  echo
+  gum spin --spinner "globe" --title "Done! Press any key to close..." -- bash -c 'read -n 1 -s'
+}
+
+# Install packages from official repos using pacman
+install() {
+  local fzf_args=(
+    --multi
+    --preview 'pacman -Sii {1}'
+    --preview-label='alt-p: toggle description, alt-j/k: scroll, tab: multi-select'
+    --preview-label-pos='bottom'
+    --preview-window 'down:65%:wrap'
+    --bind 'alt-p:toggle-preview'
+    --bind 'alt-d:preview-half-page-down,alt-u:preview-half-page-up'
+    --bind 'alt-k:preview-up,alt-j:preview-down'
+    --color 'pointer:green,marker:green'
+  )
+
+  local pkg_names
+  pkg_names=$(pacman -Slq | fzf "${fzf_args[@]}")
+
+  if [[ -n "$pkg_names" ]]; then
+    # Convert newline-separated selections to space-separated for pacman
+    echo "$pkg_names" | tr '\n' ' ' | xargs sudo pacman -S --noconfirm
+    show_done
+  fi
+}
+
+# Install packages from AUR using yay
+aur_install() {
+  local fzf_args=(
+    --multi
+    --preview 'yay -Siia {1}'
+    --preview-label='alt-p: toggle description, alt-b/B: toggle PKGBUILD, alt-j/k: scroll, tab: multi-select'
+    --preview-label-pos='bottom'
+    --preview-window 'down:65%:wrap'
+    --bind 'alt-p:toggle-preview'
+    --bind 'alt-d:preview-half-page-down,alt-u:preview-half-page-up'
+    --bind 'alt-k:preview-up,alt-j:preview-down'
+    --bind 'alt-b:change-preview:yay -Gpa {1} | tail -n +5'
+    --bind 'alt-B:change-preview:yay -Siia {1}'
+    --color 'pointer:green,marker:green'
+  )
+
+  local pkg_names
+  pkg_names=$(yay -Slqa | fzf "${fzf_args[@]}")
+
+  if [[ -n "$pkg_names" ]]; then
+    # Convert newline-separated selections to space-separated for yay
+    echo "$pkg_names" | tr '\n' ' ' | xargs yay -S --noconfirm
+    sudo updatedb
+    show_done
+  fi
+}
+
+# Show usage
+usage() {
+  cat <<EOF
+Usage: system-pkg <COMMAND>
+
+Commands:
+  install       Install packages from official repos (pacman)
+  aur-install   Install packages from AUR (yay)
+  help          Show this help message
+
+Examples:
+  system-pkg install       # Browse and install from official repos
+  system-pkg aur-install   # Browse and install from AUR
+EOF
+}
+
+# Main command dispatcher
+main() {
+  case "${1:-}" in
+  install)
+    install
+    ;;
+  aur-install)
+    aur_install
+    ;;
+  help | --help | -h)
+    usage
+    ;;
+  *)
+    echo "Error: unknown command '${1:-}'"
+    usage
+    exit 1
+    ;;
+  esac
+}
+
+main "$@"

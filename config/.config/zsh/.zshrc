@@ -14,7 +14,7 @@ export XDG_TEMPLATES_DIR="${HOME}/"
 export XDG_PUBLICSHARE_DIR="${HOME}/shared/public"
 export XDG_DOCUMENTS_DIR="${HOME}/Cloud/Documents"
 export XDG_MUSIC_DIR="${HOME}/Cloud/Music"
-export XDG_PICTURES_DIR="${HOME}/Cloud/Photos"
+export XDG_PICTURES_DIR="${HOME}/Cloud/Pictures"
 export XDG_VIDEOS_DIR="${HOME}/Cloud/Videos"
 # On change adjust `${XDG_CONFIG_HOME}/user-dirs.dirs` as well!
 

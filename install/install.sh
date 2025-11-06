@@ -22,7 +22,6 @@ run_step "Setup bluetooth" "${INSTALL_DIR}/hardware/bluetooth.sh"
 run_step "Setup printer" "${INSTALL_DIR}/hardware/printer.sh"
 run_step "Configure USB autosuspend" "${INSTALL_DIR}/hardware/usb-autosuspend.sh"
 
-run_step "Setup swap" "${INSTALL_DIR}/setup-swap.sh"
 run_step "Configure default keyring" "${INSTALL_DIR}/setup-keyring.sh"
 run_step "Setup SDDM" "${INSTALL_DIR}/setup-display-manager.sh"
 run_step "Setup bootloader" "${INSTALL_DIR}/setup-bootloader.sh"

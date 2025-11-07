@@ -59,6 +59,14 @@ open() {
   xdg-open "$@" >/dev/null 2>&1 &
 }
 
+encode64() {
+  echo -n "$1" | base64
+}
+
+decode64() {
+  echo -n "$1" | base64 -d
+}
+
 source <(fzf --zsh)
 
 # Ghostty shell integration

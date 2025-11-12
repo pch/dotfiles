@@ -21,7 +21,7 @@ set_font() {
     exit 1
   fi
 
-  if ! fc-list | grep -iq "$font_name"; then
+  if ! grep -iq "$font_name" <(fc-list); then
     echo "Font '$font_name' not found."
     exit 1
   fi

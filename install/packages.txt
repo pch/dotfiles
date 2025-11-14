@@ -156,11 +156,12 @@ zsh
 
 #
 # Desktop apps, non-essential tools
-# 
+#
 1password-beta
 1password-cli
 atuin
 exiftool
+fortune-mod
 github-cli
 lazydocker
 lazygit

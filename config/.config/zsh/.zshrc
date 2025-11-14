@@ -34,7 +34,7 @@ setopt HIST_IGNORE_ALL_DUPS
 setopt HIST_IGNORE_SPACE
 setopt EXTENDED_HISTORY
 setopt HIST_EXPIRE_DUPS_FIRST
-setopt HIST_IGNORE_DUPS 
+setopt HIST_IGNORE_DUPS
 setopt HIST_VERIFY
 setopt SHARE_HISTORY
 
@@ -95,3 +95,6 @@ fi
 for file in ${ZDOTDIR}/*.zsh; do
   [ -f "$file" ] && source "$file"
 done
+
+fortune $XDG_CONFIG_HOME/fortune
+

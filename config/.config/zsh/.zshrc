@@ -96,5 +96,5 @@ for file in ${ZDOTDIR}/*.zsh; do
   [ -f "$file" ] && source "$file"
 done
 
-fortune $XDG_CONFIG_HOME/fortune
+fortune $XDG_DATA_HOME/fortune
 

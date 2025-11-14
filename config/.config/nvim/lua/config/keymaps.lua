@@ -81,6 +81,25 @@ end
 
 vim.keymap.set("n", "<leader>fC", copy_file, { desc = "Copy File" })
 
+-- Create a new file, create directories if needed
+local function new_file()
+  local new_name = vim.fn.input('New file path: ', '', 'file')
+
+  if new_name ~= '' then
+    -- Create directory if it doesn't exist
+    local new_dir = vim.fn.fnamemodify(new_name, ':h')
+    if vim.fn.isdirectory(new_dir) == 0 then
+      vim.fn.mkdir(new_dir, 'p')
+    end
+
+    -- Open the new file in a buffer
+    vim.cmd('edit ' .. vim.fn.fnameescape(new_name))
+    vim.cmd('redraw!')
+  end
+end
+
+vim.keymap.set("n", "<leader>fN", new_file, { desc = "New File" })
+
 -- Copy file paths to system clipboard
 vim.keymap.set("n", "<leader>yr", function()
   local path = vim.fn.expand('%:.')

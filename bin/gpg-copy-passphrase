@@ -2,7 +2,8 @@
 
 set -eo pipefail
 
-if op read "op://Private/GPG Key/password" | tr -d '\n' | wl-copy; then
+# --sensitive is only available if wl-clipboard is built from source
+if op read "op://Private/GPG Key/password" | tr -d '\n' | wl-copy --sensitive; then
   notify-send -u low "GPG Key" "Passphrase copied to clipboard."
 else
   notify-send -u critical "GPG Key" "Failed to copy passphrase."

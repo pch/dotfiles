@@ -34,6 +34,7 @@ return {
         "lua_ls",
         "gopls",
         "tailwindcss",
+        "ts_ls",
       },
       handlers = {
         function(server_name) -- default handler (optional)

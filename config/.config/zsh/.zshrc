@@ -97,4 +97,4 @@ for file in ${ZDOTDIR}/*.zsh; do
 done
 
 fortune $XDG_DATA_HOME/fortune
-
+printf "\n"

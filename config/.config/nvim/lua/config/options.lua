@@ -1,5 +1,3 @@
-vim.cmd [[colorscheme tokyonight-night]]
-
 vim.opt.clipboard = 'unnamedplus' -- use system keyboard for yank
 
 vim.opt.nu = true                 -- set line numbers -- set line numbers

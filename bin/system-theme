@@ -71,33 +71,6 @@ set_gnome() {
   fi
 }
 
-# Browser theme settings
-set_browser() {
-  local chromium_theme_file="$CURRENT_THEME_DIR/chromium.theme"
-  local theme_rgb_color theme_hex_color
-
-  if [[ -f "$chromium_theme_file" ]]; then
-    theme_rgb_color=$(<"$chromium_theme_file")
-    IFS=',' read -r r g b <<<"$theme_rgb_color"
-    theme_hex_color=$(printf '#%02x%02x%02x' "$r" "$g" "$b")
-  else
-    # Use a default, neutral grey if theme doesn't have a color
-    theme_rgb_color="28,32,39"
-    theme_hex_color="#1c2027"
-  fi
-
-  rm -f /etc/chromium/policies/managed/theme.json 2>/dev/null || true
-  echo "{\"BrowserThemeColor\": \"$theme_hex_color\"}" | tee /etc/chromium/policies/managed/theme.json >/dev/null
-
-  chromium --no-startup-window --refresh-platform-policy 2>/dev/null || true
-
-  if [[ -f "$CURRENT_THEME_DIR/light.mode" ]]; then
-    chromium --no-startup-window --set-color-scheme="light" --refresh-platform-policy 2>/dev/null || true
-  else
-    chromium --no-startup-window --set-color-scheme="dark" --refresh-platform-policy 2>/dev/null || true
-  fi
-}
-
 # Cycle to next background image
 bg_next() {
   mapfile -d '' -t backgrounds < <(find -L "$BACKGROUNDS_DIR" -type f -print0 2>/dev/null | sort -z)
@@ -170,10 +143,9 @@ set_theme() {
   pkill -SIGUSR2 btop 2>/dev/null || true
   makoctl reload 2>/dev/null || true
 
-  # Change gnome, browser, and terminal themes
+  # Change gnome and terminal themes
   set_terminal
   set_gnome
-  set_browser
 
   echo "Theme set to: $(prettify_theme_name "$theme_path")"
 }

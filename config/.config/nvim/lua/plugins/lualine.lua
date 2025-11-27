@@ -4,9 +4,9 @@ return {
   config = function()
     require('lualine').setup({
       options = {
-        theme = 'tokyonight',
-        component_separators = { left = '|', right = '|'},
-        section_separators = { left = '', right = ''},
+        theme = 'tomorrow_night',
+        component_separators = { left = '|', right = '|' },
+        section_separators = { left = '', right = '' },
       },
     })
   end

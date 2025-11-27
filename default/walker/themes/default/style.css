@@ -6,7 +6,7 @@
 
 * {
   font-family: monospace;
-  font-size: 18px;
+  font-size: 14px;
   color: @text;
 }
 
@@ -56,12 +56,16 @@ scrollbar {
 }
 
 .placeholder {
+  min-height: 300px;
+  min-width: 644px;
 }
 
 .scroll {
+  min-height: 300px;
 }
 
 .list {
+  min-height: 300px;
 }
 
 child,
@@ -72,6 +76,7 @@ child:hover .item-box {
 }
 
 child:selected .item-box {
+  background: @selected-background;
 }
 
 child:selected .item-box * {
@@ -79,7 +84,8 @@ child:selected .item-box * {
 }
 
 .item-box {
-  padding-left: 14px;
+  border-radius: 10px;
+  padding: 7px 14px;
 }
 
 .item-text-box {

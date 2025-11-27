@@ -4,7 +4,7 @@ selection_wrap = true                                                       # wr
 click_to_close = true                                                       # closes walker if clicking outside of the main content area
 global_argument_delimiter = "#"                                             # query: firefox#https://benz.dev => part after delimiter will be ignored when querying. this should be the same as in the elephant config
 exact_search_prefix = "'"                                                   # disable fuzzy searching
-theme = "omarchy-default"                                                   # theme to use
+theme = "default"                                                   # theme to use
 disable_mouse = false                                                       # disable mouse (on input and list only)
 additional_theme_location = "~/.local/share/dotfiles/default/walker/themes/"
 

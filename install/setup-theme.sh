@@ -7,8 +7,6 @@ mkdir -p ~/.config/current
 ln -snf $DOTFILES_DIR/themes/tokyo-night ~/.config/current/theme
 ln -snf ~/.config/current/theme/backgrounds/1-scenery-pink-lakeside-sunset-lake-landscape-scenic-panorama-7680x3215-144.png ~/.config/current/background
 
-ln -snf ~/.config/current/theme/neovim.lua ~/.config/nvim/lua/plugins/theme.lua
-
 mkdir -p ~/.config/btop/themes
 ln -snf ~/.config/current/theme/btop.theme ~/.config/btop/themes/current.theme
 
@@ -16,8 +14,8 @@ mkdir -p ~/.config/mako
 ln -snf ~/.config/current/theme/mako.ini ~/.config/mako/config
 
 # Add managed policy directories for Chromium for theme changes
-sudo mkdir -p /etc/chromium/policies/managed
-sudo chmod a+rw /etc/chromium/policies/managed
+# sudo mkdir -p /etc/chromium/policies/managed
+# sudo chmod a+rw /etc/chromium/policies/managed
 
 # Gnome theme
 gsettings set org.gnome.desktop.interface gtk-theme "Adwaita-dark"

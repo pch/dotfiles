@@ -3,4 +3,4 @@ export TERMINAL=ghostty
 export EDITOR=nvim
 
 export SCREENSHOTS_DIR="$HOME/Cloud/Pictures/Screenshots"
-# export SCREENRECORDS_DIR="$HOME/Videos/Screencasts"
+export SCREENRECORDS_DIR="$HOME/Cloud/Videos/Screenrecords"

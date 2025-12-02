@@ -5,7 +5,8 @@ config-file = ?"~/.config/current/theme/ghostty.conf"
 font-family = "JetBrainsMono Nerd Font"
 font-style = Regular
 font-size = 10
-font-feature = -calt, -liga, -dlig # disable ligatures
+# disable ligatures
+font-feature = -calt, -liga, -dlig
 
 # Window
 window-theme = ghostty

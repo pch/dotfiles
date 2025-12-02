@@ -14,10 +14,10 @@ xdg-mime default imv.desktop image/tiff
 # Open PDFs with the Document Viewer
 xdg-mime default org.gnome.Evince.desktop application/pdf
 
-# Use Chromium as the default browser
-xdg-settings set default-web-browser chromium.desktop
-xdg-mime default chromium.desktop x-scheme-handler/http
-xdg-mime default chromium.desktop x-scheme-handler/https
+# Use Brave as the default browser
+xdg-settings set default-web-browser brave.desktop
+xdg-mime default brave.desktop x-scheme-handler/http
+xdg-mime default brave.desktop x-scheme-handler/https
 
 # Open video files with mpv
 xdg-mime default mpv.desktop video/mp4
@@ -35,3 +35,22 @@ xdg-mime default mpv.desktop video/x-ms-asf
 xdg-mime default mpv.desktop video/x-ogm+ogg
 xdg-mime default mpv.desktop video/x-theora+ogg
 xdg-mime default mpv.desktop application/ogg
+
+# neovim for text files
+xdg-mime default nvim.desktop text/plain
+xdg-mime default nvim.desktop text/english
+xdg-mime default nvim.desktop text/x-makefile
+xdg-mime default nvim.desktop text/x-c++hdr
+xdg-mime default nvim.desktop text/x-c++src
+xdg-mime default nvim.desktop text/x-chdr
+xdg-mime default nvim.desktop text/x-csrc
+xdg-mime default nvim.desktop text/x-java
+xdg-mime default nvim.desktop text/x-moc
+xdg-mime default nvim.desktop text/x-pascal
+xdg-mime default nvim.desktop text/x-tcl
+xdg-mime default nvim.desktop text/x-tex
+xdg-mime default nvim.desktop application/x-shellscript
+xdg-mime default nvim.desktop text/x-c
+xdg-mime default nvim.desktop text/x-c++
+xdg-mime default nvim.desktop application/xml
+xdg-mime default nvim.desktop text/xml

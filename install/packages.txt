@@ -6,6 +6,7 @@ avahi
 base-devel
 bat
 blueberry
+brave-bin
 brightnessctl
 btop
 cargo

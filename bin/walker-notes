@@ -14,11 +14,11 @@ filename=$(echo "$selected" | awk '{print $1}' | sed 's/:.*//')
 cd "$NOTES_DIR"
 
 if [[ -f "${NOTES_DIR}/${filename}" ]]; then
-  setsid -f $TERMINAL -e nvim "$filename"
+  setsid -f xdg-terminal-exec -e nvim "$filename"
 else
   # Create a new note
   title="$selected"
   new_file=$(notes new "$title" | tail -n 1)
   new_filename=$(basename "$new_file")
-  setsid -f $TERMINAL -e nvim "$new_filename"
+  setsid -f xdg-terminal-exec -e nvim "$new_filename"
 fi

@@ -149,6 +149,7 @@ wl-clipboard
 woff2-font-awesome
 xdg-desktop-portal-gtk
 xdg-desktop-portal-hyprland
+xdg-terminal-exec
 xmlstarlet
 yaru-icon-theme
 zoxide

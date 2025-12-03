@@ -1,5 +1,5 @@
 # Changes require a restart to take effect.
-export TERMINAL=ghostty
+export TERMINAL=xdg-terminal-exec
 export EDITOR=nvim
 
 export SCREENSHOTS_DIR="$HOME/Cloud/Pictures/Screenshots"

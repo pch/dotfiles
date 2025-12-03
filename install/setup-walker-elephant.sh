@@ -16,3 +16,6 @@ Description = Restarting Walker services after system update
 When = PostTransaction
 Exec = $DOTFILES_DIR/bin/restart-walker
 EOF
+
+elephant service enable
+systemctl --user start elephant.service

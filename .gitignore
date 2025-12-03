@@ -1,6 +1,7 @@
 *.log
 *.bak
 config/.config/systemd/user/default.target.wants
+config/.config/systemd/user/graphical-session.target.wants
 config/.config/fcitx5/conf/cached_layouts
 config/.config/zsh/.zcompdump
 

@@ -5,6 +5,7 @@ autoconf-archive
 avahi
 base-devel
 bat
+bind
 blueberry
 brave-bin
 brightnessctl

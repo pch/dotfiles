@@ -18,5 +18,7 @@ vim.opt.termguicolors = true
 
 vim.opt.updatetime = 250 -- faster cursor hold events (for diagnostic popups)
 
+vim.opt.backupcopy = 'yes' -- fix file watchers by copying instead of renaming
+
 -- Show which line your cursor is on
 vim.o.cursorline = true

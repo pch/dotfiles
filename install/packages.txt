@@ -120,6 +120,7 @@ ripgrep
 rsync
 satty
 sddm
+signal-desktop-beta
 slurp
 snapper
 starship

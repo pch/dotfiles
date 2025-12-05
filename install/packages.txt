@@ -49,6 +49,7 @@ ffmpegthumbnailer
 fontconfig
 fwupd
 fzf
+gdm
 ghostty
 git
 gnome-calculator
@@ -120,7 +121,6 @@ qt6-wayland
 ripgrep
 rsync
 satty
-sddm
 signal-desktop-beta
 slurp
 snapper

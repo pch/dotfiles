@@ -1,3 +1,3 @@
 #!/bin/bash
 
-sudo systemctl enable gdm
+sudo systemctl enable gdm.service

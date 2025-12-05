@@ -49,6 +49,7 @@ ffmpegthumbnailer
 fontconfig
 fwupd
 fzf
+gazelle-tui
 gdm
 ghostty
 git
@@ -72,7 +73,6 @@ hyprpaper
 hyprpicker
 hyprsunset
 imagemagick
-impala
 imv
 inetutils
 intltool
@@ -98,6 +98,7 @@ mise
 mpv
 nautilus
 neovim
+networkmanager
 newsflash
 noto-fonts
 noto-fonts-cjk

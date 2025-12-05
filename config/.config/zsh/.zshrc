@@ -4,6 +4,7 @@ export LC_ALL="en_US.UTF-8"
 
 export DOTFILES_DIR="${HOME}/.local/share/dotfiles"
 export PATH="./bin:${DOTFILES_DIR}/bin:$HOME/.local/bin:$PATH"
+export EDITOR="nvim"
 
 export XDG_CONFIG_HOME="${HOME}/.config"
 export XDG_CACHE_HOME="${HOME}/.cache"

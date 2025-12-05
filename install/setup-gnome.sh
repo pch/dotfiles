@@ -14,6 +14,9 @@ gsettings set org.gnome.desktop.interface clock-format '24h'
 # Hide the date
 gsettings set org.gnome.desktop.interface clock-show-date false
 
+# Celsius for weather
+gsettings set org.gnome.desktop.interface temperature-unit 'celsius'
+
 # ╔════════════════════════════════════════════════════════════════════════════╗
 # ║ Hotkeys                                                                    ║
 # ╚════════════════════════════════════════════════════════════════════════════╝

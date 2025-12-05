@@ -1,0 +1,7 @@
+# Gnome packages
+gnome
+gnome-extensions
+gnome-extra
+gnome-shell-extensions-manager
+gnome-tweaks
+notify-osd

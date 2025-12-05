@@ -138,7 +138,6 @@ tzupdate
 ufw
 ufw-docker
 unzip
-uwsm
 walker
 waybar
 wayfreeze

@@ -61,7 +61,7 @@ gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-4 "['<Super><Sh
 gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-5 "['<Super><Shift>5']"
 gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-6 "['<Super><Shift>6']"
 
-# Resisze windows
+# Resize windows
 gsettings set org.gnome.desktop.wm.keybindings begin-resize "['<Super>BackSpace']"
 
 # Reserve slots for custom keybindings

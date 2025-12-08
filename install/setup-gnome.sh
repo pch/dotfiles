@@ -15,7 +15,7 @@ gsettings set org.gnome.desktop.interface clock-format '24h'
 gsettings set org.gnome.desktop.interface clock-show-date false
 
 # Celsius for weather
-gsettings set org.gnome.desktop.interface temperature-unit 'celsius'
+gsettings set org.gnome.GWeather4 temperature-unit centigrade
 
 # ╔════════════════════════════════════════════════════════════════════════════╗
 # ║ Hotkeys                                                                    ║
@@ -93,6 +93,7 @@ gext install space-bar@luchrioh
 gext install undecorate@sun.wxg@gmail.com
 gext install tophat@fflewddur.github.io
 gext install AlphabeticalAppGrid@stuarthayhurst
+gext install emoji-copy@felipeftn
 
 EXT_DIR="$HOME/.local/share/gnome-shell/extensions"
 

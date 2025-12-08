@@ -5,3 +5,4 @@ gnome-extra
 gnome-shell-extensions-manager
 gnome-tweaks
 notify-osd
+python-pipx

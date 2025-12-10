@@ -68,7 +68,9 @@ decode64() {
   echo -n "$1" | base64 -d
 }
 
-source <(fzf --zsh)
+if command -v fzf &> /dev/null; then
+  source <(fzf --zsh)
+fi
 
 # Ghostty shell integration
 if [ -n "${GHOSTTY_RESOURCES_DIR}" ]; then
@@ -97,5 +99,7 @@ for file in ${ZDOTDIR}/*.zsh; do
   [ -f "$file" ] && source "$file"
 done
 
-fortune $XDG_DATA_HOME/fortune
-printf "\n"
+if command -v fortune &> /dev/null; then
+  fortune $XDG_DATA_HOME/fortune
+  printf "\n"
+fi

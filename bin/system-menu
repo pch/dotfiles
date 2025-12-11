@@ -33,17 +33,17 @@ show_main_menu() {
     *Keybindings*) system-menu-keybindings ;;
     *"Snap with Editing"*) omarchy-cmd-screenshot smart ;;
     *"Straight to Clipboard"*) omarchy-cmd-screenshot smart clipboard ;;
-    *"With desktop + microphone audio + webcam"*)
+    *"Desktop + microphone audio + webcam"*)
       if ! omarchy-cmd-screenrecord --stop-recording; then
         omarchy-cmd-screenrecord --with-desktop-audio --with-microphone-audio --with-webcam
       fi
       ;;
-    *"With desktop + microphone audio"*)
+    *"Desktop + microphone audio"*)
       if ! omarchy-cmd-screenrecord --stop-recording; then
         omarchy-cmd-screenrecord --with-desktop-audio --with-microphone-audio
       fi
       ;;
-    *"With desktop audio"*)
+    *"Desktop audio"*)
       if ! omarchy-cmd-screenrecord --stop-recording; then
         omarchy-cmd-screenrecord --with-desktop-audio
       fi

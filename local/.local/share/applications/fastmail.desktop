@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=Fastmail
+Exec=fastmail --password-store=gnome-libsecret %U
+Terminal=false
+Type=Application
+Icon=fastmail
+StartupWMClass=Fastmail
+MimeType=x-scheme-handler/mailto;x-scheme-handler/fastmail;
+Comment=Email and calendar made better
+Categories=Email;Network;
+X-Desktop-File-Install-Version=0.28

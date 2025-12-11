@@ -1,0 +1,6 @@
+# Changes require a restart to take effect.
+export TERMINAL=xdg-terminal-exec
+export EDITOR=nvim
+
+export SCREENSHOTS_DIR="$HOME/Cloud/Pictures/Screenshots"
+export SCREENRECORDS_DIR="$HOME/Cloud/Videos/Screenrecords"

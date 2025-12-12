@@ -10,16 +10,8 @@ ln -snf ~/.config/current/theme/backgrounds/1-scenery-pink-lakeside-sunset-lake-
 mkdir -p ~/.config/btop/themes
 ln -snf ~/.config/current/theme/btop.theme ~/.config/btop/themes/current.theme
 
-mkdir -p ~/.config/mako
-ln -snf ~/.config/current/theme/mako.ini ~/.config/mako/config
-
 # Add managed policy directories for Chromium for theme changes
 # sudo mkdir -p /etc/chromium/policies/managed
 # sudo chmod a+rw /etc/chromium/policies/managed
-
-# Gnome theme
-gsettings set org.gnome.desktop.interface gtk-theme "Adwaita-dark"
-gsettings set org.gnome.desktop.interface color-scheme "prefer-dark"
-gsettings set org.gnome.desktop.interface icon-theme "Yaru-blue"
 
 sudo gtk-update-icon-cache /usr/share/icons/Yaru

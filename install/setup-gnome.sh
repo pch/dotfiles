@@ -97,7 +97,6 @@ gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/or
 pipx install gnome-extensions-cli --system-site-packages
 
 # Install new extensions
-gext install tactile@lundal.io
 gext install just-perfection-desktop@just-perfection
 gext install blur-my-shell@aunetx
 gext install space-bar@luchrioh
@@ -116,15 +115,6 @@ for ext_path in "$EXT_DIR"/*; do
     echo "Compiled schemas for $ext_name"
   fi
 done
-
-# Configure Tactile
-gsettings set org.gnome.shell.extensions.tactile col-0 1
-gsettings set org.gnome.shell.extensions.tactile col-1 2
-gsettings set org.gnome.shell.extensions.tactile col-2 1
-gsettings set org.gnome.shell.extensions.tactile col-3 0
-gsettings set org.gnome.shell.extensions.tactile row-0 1
-gsettings set org.gnome.shell.extensions.tactile row-1 1
-gsettings set org.gnome.shell.extensions.tactile gap-size 32
 
 # Configure Just Perfection
 gsettings set org.gnome.shell.extensions.just-perfection animation 2

@@ -17,6 +17,9 @@ gsettings set org.gnome.desktop.interface clock-show-date false
 # Celsius for weather
 gsettings set org.gnome.GWeather4 temperature-unit centigrade
 
+# Theme settings
+gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
+
 # ╔════════════════════════════════════════════════════════════════════════════╗
 # ║ Hotkeys                                                                    ║
 # ╚════════════════════════════════════════════════════════════════════════════╝

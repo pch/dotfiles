@@ -51,26 +51,6 @@ set_terminal() {
   killall -SIGUSR2 ghostty 2>/dev/null || true
 }
 
-# GNOME theme settings
-set_gnome() {
-  # Change gnome modes
-  if [[ -f "$CURRENT_THEME_DIR/light.mode" ]]; then
-    gsettings set org.gnome.desktop.interface color-scheme "prefer-light"
-    gsettings set org.gnome.desktop.interface gtk-theme "Adwaita"
-  else
-    gsettings set org.gnome.desktop.interface color-scheme "prefer-dark"
-    gsettings set org.gnome.desktop.interface gtk-theme "Adwaita-dark"
-  fi
-
-  # Change gnome icon theme color
-  local icons_theme_file="$CURRENT_THEME_DIR/icons.theme"
-  if [[ -f "$icons_theme_file" ]]; then
-    gsettings set org.gnome.desktop.interface icon-theme "$(<"$icons_theme_file")"
-  else
-    gsettings set org.gnome.desktop.interface icon-theme "Yaru-blue"
-  fi
-}
-
 # Cycle to next background image
 bg_next() {
   mapfile -d '' -t backgrounds < <(find -L "$BACKGROUNDS_DIR" -type f -print0 2>/dev/null | sort -z)
@@ -143,9 +123,7 @@ set_theme() {
   pkill -SIGUSR2 btop 2>/dev/null || true
   makoctl reload 2>/dev/null || true
 
-  # Change gnome and terminal themes
   set_terminal
-  set_gnome
 
   echo "Theme set to: $(prettify_theme_name "$theme_path")"
 }

@@ -36,6 +36,12 @@ Once arch is installed, reboot, log in as your user and run the following comman
 curl -fsSL https://raw.githubusercontent.com/pch/dotfiles/refs/heads/master/boot.sh | bash
 ```
 
+GPG setup isn't triggered by default. Run it manually:
+
+```bash
+./install/setup-gpg.sh
+```
+
 ## Credits
 
 This setup was initially based on [Omarchy](https://omarchy.org/).

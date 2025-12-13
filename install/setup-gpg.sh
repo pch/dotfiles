@@ -3,15 +3,13 @@ set -euo pipefail
 
 source "${DOTFILES_DIR}/install/helpers.sh"
 
-GPG_TTY=$TTY
+export GPG_TTY=$(tty)
 KEY_ID="1E5426A43FB77000"
 
-# Check if GPG is installed
 if ! command -v gpg &>/dev/null; then
   error "GPG is not installed. Please install it first."
 fi
 
-# Check if the key is already imported
 if gpg --list-keys "$KEY_ID" &>/dev/null; then
   log "GPG key $KEY_ID is already imported."
   exit 0
@@ -19,17 +17,14 @@ fi
 
 log "GPG key $KEY_ID not found. Attempting to import from 1Password..."
 
-# Check if 1Password CLI is installed
 if ! command -v op &>/dev/null; then
   error "1Password CLI (op) is not installed. Please install it first."
 fi
 
-# Check if signed in to 1Password
 if ! op account list &>/dev/null; then
   error "Not signed in to 1Password. Please run 'eval \$(op signin)' first."
 fi
 
-# Import the key from 1Password
 log "Importing GPG key from 1Password..."
 op read "op://Private/GPG Key/private_key" | gpg --import
 

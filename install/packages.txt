@@ -35,6 +35,7 @@ elephant-runner
 elephant-symbols
 elephant-todo
 elephant-unicode
+elephant-windows
 elephant-websearch
 evince
 expac

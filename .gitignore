@@ -1,12 +1,12 @@
 *.log
 *.bak
-config/.config/systemd/user/default.target.wants
-config/.config/systemd/user/graphical-session.target.wants
-config/.config/fcitx5/conf/cached_layouts
-config/.config/zsh/.zcompdump
+dotfiles/.config/systemd/user/default.target.wants
+dotfiles/.config/systemd/user/graphical-session.target.wants
+dotfiles/.config/fcitx5/conf/cached_layouts
+dotfiles/.config/zsh/.zcompdump
 
-config/.config/nvim/lazy-lock.json
+dotfiles/.config/nvim/lazy-lock.json
 
 # Ignore everything in gnupg directory except .conf files
-config/.config/gnupg/*
-!config/.config/gnupg/*.conf
+dotfiles/.config/gnupg/*
+!dotfiles/.config/gnupg/*.conf

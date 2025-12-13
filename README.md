@@ -2,17 +2,16 @@
 
 This is my complete system setup for Arch Linux (GNOME + Hyprland).
 
-Originally based on [Omarchy](https://omarchy.org/), but heavily modified and stripped down.
+Includes:
 
-- Omarchy look/themes and keybindings
+- GNOME and gdm
+- stow for symlinking the dotfiles directory
 - ZSH
 - PGP
 - Ghostty
 - Syncthing
 
 These dotfiles are not meant to be generic, they are tailored to my personal workflow.
-
-Work in progress.
 
 ## Arch Linux Setup
 
@@ -36,3 +35,7 @@ Once arch is installed, reboot, log in as your user and run the following comman
 ```bash
 curl -fsSL https://raw.githubusercontent.com/pch/dotfiles/refs/heads/master/boot.sh | bash
 ```
+
+## Credits
+
+This setup was initially based on [Omarchy](https://omarchy.org/).

@@ -12,8 +12,7 @@ packages=(
   hyprpaper
   hyprpicker
   waybar
-  walker
-  elephant
+  fuzzel
   grim
   slurp
   hyprshot
@@ -23,7 +22,6 @@ packages=(
 
 copr_repos=(
   sdegler/hyprland
-  errornointernet/walker
   erikreider/swayosd
 )
 

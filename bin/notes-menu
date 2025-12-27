@@ -3,7 +3,7 @@ set -euo pipefail
 
 NOTES_DIR="$HOME/Cloud/Notes"
 
-selected=$(notes list | walker --dmenu)
+selected=$(notes list | fuzzel --dmenu)
 
 if [[ -z "$selected" ]]; then
   exit 0

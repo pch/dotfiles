@@ -20,6 +20,9 @@ gsettings set org.gnome.GWeather4 temperature-unit centigrade
 # Theme settings
 gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
 
+# Enable compose key (Right Alt)
+gsettings set org.gnome.desktop.input-sources xkb-options "['compose:ralt']"
+
 # ╔════════════════════════════════════════════════════════════════════════════╗
 # ║ Hotkeys                                                                    ║
 # ╚════════════════════════════════════════════════════════════════════════════╝

@@ -1,0 +1,14 @@
+*.log
+*.bak
+dotfiles/.config/systemd/user/default.target.wants
+dotfiles/.config/systemd/user/graphical-session.target.wants
+dotfiles/.config/fcitx5/conf/cached_layouts
+dotfiles/.config/zsh/.zcompdump
+dotfiles/.config/zsh/.zsh_history
+dotfiles/.config/zsh/.zsh_sessions/*
+
+dotfiles/.config/nvim/lazy-lock.json
+
+# Ignore everything in gnupg directory except .conf files
+dotfiles/.config/gnupg/*
+!dotfiles/.config/gnupg/*.conf

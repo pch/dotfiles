@@ -1,0 +1,184 @@
+#!/bin/bash
+
+# system-theme - unified theme management script
+# Usage:
+#   system-theme              Show current theme
+#   system-theme list         List all available themes
+#   system-theme set <name>   Set a new theme
+#   system-theme bg-next      Cycle to next background image
+
+set -euo pipefail
+
+THEMES_DIR="${DOTFILES_DIR}/themes/"
+CURRENT_THEME_DIR="$HOME/.config/current/theme"
+BACKGROUNDS_DIR="$HOME/.config/current/theme/backgrounds/"
+CURRENT_BACKGROUND_LINK="$HOME/.config/current/background"
+
+# Normalize theme name (lowercase, spaces to dashes, remove markup)
+normalize_theme_name() {
+  echo "$1" | sed -E 's/<[^>]+>//g' | tr '[:upper:]' '[:lower:]' | tr ' ' '-'
+}
+
+# Pretty-print theme name (capitalize words, dashes to spaces)
+prettify_theme_name() {
+  basename "$1" | sed -E 's/(^|-)([a-z])/\1\u\2/g; s/-/ /g'
+}
+
+# Show current theme
+show_current() {
+  if [[ ! -L "$CURRENT_THEME_DIR" ]]; then
+    echo "No theme is currently set"
+    exit 1
+  fi
+  prettify_theme_name "$(realpath "$CURRENT_THEME_DIR")"
+}
+
+# List all available themes
+list_themes() {
+  if [[ ! -d "$THEMES_DIR" ]]; then
+    echo "Themes directory not found: $THEMES_DIR"
+    exit 1
+  fi
+
+  find "$THEMES_DIR" -mindepth 1 -maxdepth 1 \( -type d -o -type l \) | sort | while read -r path; do
+    prettify_theme_name "$path"
+  done
+}
+
+# Terminal theme reload
+set_terminal() {
+  killall -SIGUSR1 kitty 2>/dev/null || true
+  killall -SIGUSR2 ghostty 2>/dev/null || true
+}
+
+# Cycle to next background image
+bg_next() {
+  mapfile -d '' -t backgrounds < <(find -L "$BACKGROUNDS_DIR" -type f -print0 2>/dev/null | sort -z)
+  local total=${#backgrounds[@]}
+
+  if [[ $total -eq 0 ]]; then
+    notify-send "No background was found for theme" -t 2000
+    pkill -x hyprpaper || true
+    setsid hyprpaper >/dev/null 2>&1 &
+    return
+  fi
+
+  # Get current background from symlink
+  local current_background=""
+  if [[ -L "$CURRENT_BACKGROUND_LINK" ]]; then
+    current_background=$(readlink "$CURRENT_BACKGROUND_LINK")
+  fi
+
+  # Find current background index
+  local index=-1
+  for i in "${!backgrounds[@]}"; do
+    if [[ "${backgrounds[$i]}" == "$current_background" ]]; then
+      index=$i
+      break
+    fi
+  done
+
+  # Get next background (wrap around)
+  local new_background
+  if [[ $index -eq -1 ]]; then
+    # Use the first background when no match was found
+    new_background="${backgrounds[0]}"
+  else
+    local next_index=$(((index + 1) % total))
+    new_background="${backgrounds[$next_index]}"
+  fi
+
+  # Set new background symlink
+  ln -nsf "$new_background" "$CURRENT_BACKGROUND_LINK"
+
+  # Relaunch hyprpaper
+  pkill -x hyprpaper || true
+  setsid hyprpaper >/dev/null 2>&1 &
+}
+
+# Set a new theme
+set_theme() {
+  mkdir -p ~/.config/current
+
+  local theme_name
+  theme_name=$(normalize_theme_name "$1")
+  local theme_path="$THEMES_DIR/$theme_name"
+
+  # Check if the theme exists
+  if [[ ! -d "$theme_path" ]]; then
+    echo "Theme '$theme_name' does not exist in $THEMES_DIR"
+    echo "Available themes:"
+    list_themes
+    exit 1
+  fi
+
+  # Update theme symlinks
+  ln -nsf "$theme_path" "$CURRENT_THEME_DIR"
+
+  # Change background with theme
+  bg_next
+
+  # Restart components to apply new theme
+  restart-app waybar 2>/dev/null || true
+  restart-app swayosd-server 2>/dev/null || true
+  hyprctl reload 2>/dev/null || true
+  pkill -SIGUSR2 btop 2>/dev/null || true
+  makoctl reload 2>/dev/null || true
+
+  set_terminal
+
+  echo "Theme set to: $(prettify_theme_name "$theme_path")"
+}
+
+# Show usage
+usage() {
+  cat <<EOF
+Usage: system-theme [COMMAND] [ARGS]
+
+Commands:
+  (no command)      Show current theme
+  list              List all available themes
+  set <name>        Set a new theme
+  bg-next           Cycle to next background image
+  help              Show this help message
+
+Examples:
+  system-theme                    # Show current theme
+  system-theme list               # List themes
+  system-theme set dark-blue      # Set theme
+  system-theme bg-next            # Next background
+EOF
+}
+
+# Main command dispatcher
+main() {
+  case "${1:-}" in
+  "")
+    show_current
+    ;;
+  list)
+    list_themes
+    ;;
+  set)
+    if [[ -z "${2:-}" ]]; then
+      echo "Error: theme name required"
+      echo "Usage: system-theme set <name>"
+      exit 1
+    fi
+    set_theme "$2"
+    ;;
+  bg-next)
+    bg_next
+    ;;
+  help | --help | -h)
+    usage
+    ;;
+  *)
+    echo "Error: unknown command '$1'"
+    usage
+    exit 1
+    ;;
+  esac
+}
+
+main "$@"

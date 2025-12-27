@@ -1,0 +1,33 @@
+# Dynamic theme colors
+# config-file = ?"~/.config/current/theme/ghostty.conf"
+theme = Tomorrow Night
+
+# Font
+font-family = "JetBrainsMono Nerd Font"
+font-style = Regular
+# font-size = 12
+# disable ligatures
+font-feature = -calt, -liga, -dlig
+
+# Window
+window-theme = ghostty
+window-padding-x = 14
+window-padding-y = 14
+confirm-close-surface=false
+resize-overlay = never
+gtk-toolbar-style = flat
+
+# Cursor styling
+cursor-style = "block"
+cursor-style-blink = false
+shell-integration-features = no-cursor
+
+# Keyboard bindings
+keybind = shift+insert=paste_from_clipboard
+keybind = control+insert=copy_to_clipboard
+
+# SSH session terminfo
+shell-integration-features = ssh-env
+keybind = shift+enter=text:\x1b\r
+
+keybind = ctrl+k=clear_screen

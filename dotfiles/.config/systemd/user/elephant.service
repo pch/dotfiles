@@ -1,0 +1,13 @@
+
+[Unit]
+Description=Elephant
+After=xdg-desktop-autostart.target
+
+[Service]
+Type=simple
+ExecStart=elephant
+Restart=on-failure
+
+[Install]
+WantedBy=graphical-session.target
+							

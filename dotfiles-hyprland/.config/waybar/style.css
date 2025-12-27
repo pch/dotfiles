@@ -1,0 +1,81 @@
+@import "../current/theme/waybar.css";
+
+* {
+  border: none;
+  border-radius: 0;
+  min-height: 0;
+  font-family: "JetBrainsMono Nerd Font";
+  font-size: 12px;
+}
+
+window#waybar {
+  background-color: @background;
+  color: @foreground;
+}
+
+.modules-left {
+  margin-left: 9px;
+}
+
+.modules-right {
+  margin-right: 9px;
+}
+
+#workspaces button {
+  all: initial;
+  padding: 0 8px;
+  margin: 4px 2px;
+  min-width: 9px;
+  border-radius: 4px;
+  background: @background-accent;
+}
+
+#workspaces button.empty {
+  opacity: 0.5;
+}
+
+#workspaces button:hover,
+#workspaces button.active {
+  background-color: @background-accent-alt;
+}
+
+#cpu,
+#battery,
+#pulseaudio,
+#memory,
+#custom-update {
+  min-width: 12px;
+  margin: 0 7.5px;
+}
+
+#tray {
+  margin-right: 16px;
+}
+
+#bluetooth {
+  margin-right: 17px;
+}
+
+#network {
+  margin-right: 13px;
+}
+
+#custom-expand-icon {
+  margin-right: 20px;
+}
+
+tooltip {
+  padding: 2px;
+}
+
+#custom-update {
+  font-size: 10px;
+}
+
+#clock {
+  margin-left: 0.75px;
+}
+
+.hidden {
+  opacity: 0;
+}

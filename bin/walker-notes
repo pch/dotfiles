@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+NOTES_DIR="$HOME/Cloud/Notes"
+
+selected=$(notes list | walker --dmenu)
+
+if [[ -z "$selected" ]]; then
+  exit 0
+fi
+
+filename=$(echo "$selected" | awk '{print $1}' | sed 's/:.*//')
+
+cd "$NOTES_DIR"
+
+if [[ -f "${NOTES_DIR}/${filename}" ]]; then
+  setsid -f xdg-terminal-exec -e nvim "$filename"
+else
+  # Create a new note
+  title="$selected"
+  new_file=$(notes new "$title" | tail -n 1)
+  new_filename=$(basename "$new_file")
+  setsid -f xdg-terminal-exec -e nvim "$new_filename"
+fi

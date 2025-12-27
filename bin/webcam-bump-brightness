@@ -1,0 +1,29 @@
+#!/bin/bash
+set -euo pipefail
+
+direction="${1:-up}"
+
+# Get current brightness value
+current=$(v4l2-ctl -C brightness --silent | awk -F': ' '{print $2}')
+
+# Calculate new brightness
+if [[ "$direction" == "up" ]]; then
+  new=$((current + 20))
+elif [[ "$direction" == "down" ]]; then
+  new=$((current - 20))
+else
+  echo "Usage: webcam-bump-brightness [up|down]"
+  exit 1
+fi
+
+# Clamp to valid range (0-255)
+if [[ $new -lt 0 ]]; then
+  new=0
+elif [[ $new -gt 255 ]]; then
+  new=255
+fi
+
+# Set new brightness
+v4l2-ctl -c brightness="$new"
+
+echo "Brightness: $current -> $new"  pack

@@ -1,0 +1,3 @@
+#!/bin/bash
+
+gtk-launch "$(xdg-settings get default-web-browser)" "$@"

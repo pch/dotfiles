@@ -1,0 +1,164 @@
+#!/usr/bin/env bash
+
+set -e
+
+NOTES_DIR="$HOME/Cloud/Notes"
+
+# Colors for output
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+NC='\033[0m' # No Color
+
+if ! command -v fd &> /dev/null; then
+  echo -e "${RED}Error: 'fd' is required but not installed.${NC}" >&2
+  echo "Install with: brew install fd" >&2
+  exit 1
+fi
+
+if ! command -v rg &> /dev/null; then
+  echo -e "${RED}Error: 'ripgrep' is required but not installed.${NC}" >&2
+  echo "Install with: brew install ripgrep" >&2
+  exit 1
+fi
+
+error() {
+  echo -e "${RED}Error: $1${NC}" >&2
+  exit 1
+}
+
+success() {
+  echo -e "${GREEN}$1${NC}"
+}
+
+info() {
+  echo -e "${YELLOW}$1${NC}"
+}
+
+sanitize_title() {
+  local title="$1"
+
+  # Convert to lowercase
+  title=$(echo "$title" | tr '[:upper:]' '[:lower:]')
+
+  # Remove special characters, keep only alphanumeric, spaces, and hyphens
+  title=$(echo "$title" | sed 's/[^a-z0-9 -]//g')
+
+  # Replace multiple spaces with single hyphen
+  title=$(echo "$title" | sed 's/  */-/g')
+
+  # Replace multiple hyphens with single hyphen
+  title=$(echo "$title" | sed 's/-\+/-/g')
+
+  # Remove leading/trailing hyphens
+  title=$(echo "$title" | sed 's/^-\+//; s/-\+$//')
+
+  echo "$title"
+}
+
+generate_timestamp() {
+  date +"%Y%m%d%H%M"
+}
+
+cmd_new() {
+  local title="$*"
+
+  if [[ -z "$title" ]]; then
+    error "Title cannot be empty. Usage: notes new <title>"
+  fi
+
+  local timestamp=$(generate_timestamp)
+  local sanitized_title=$(sanitize_title "$title")
+
+  if [[ -z "$sanitized_title" ]]; then
+    error "Title resulted in empty string after sanitization"
+  fi
+
+  local filename="${timestamp}-${sanitized_title}.md"
+  local filepath="${NOTES_DIR}/${filename}"
+
+  if [[ -f "$filepath" ]]; then
+    error "File already exists: $filename"
+  fi
+
+  # Create the note with the original title as first line
+  echo "# $title" > "$filepath"
+  echo "" >> "$filepath"
+
+  success "Created: $filename"
+  echo "$filepath"
+}
+
+# List notes sorted by recent first
+#
+# Prints filename and first line as title:
+# 202511091225-new-note-structure.md: New Note Structure
+cmd_list() {
+  cd "$NOTES_DIR" || return
+
+  rg --no-heading --max-count 1 '^' --glob '*.md' --max-depth 1 -N --sort path --replace '$path $title' | sed 's/# //' | sort -r
+}
+
+cmd_search() {
+  local query="$*"
+
+  if [[ -z "$query" ]]; then
+    error "Search query cannot be empty. Usage: notes search <keyword>"
+  fi
+
+  cd "$NOTES_DIR"
+  rg -i --glob '*.md' -m1 --no-heading -N "$query"
+}
+
+cmd_help() {
+  cat << EOF
+notes - Note Management Tool
+
+Usage: notes <command> [options]
+
+Commands:
+  new <title>          Create a new note with timestamp and sanitized filename
+  list                 List all notes sorted by date (recent first)
+  search <keyword>     Search notes by filename and content
+  help                 Show this help message
+
+Examples:
+  notes new My New Note
+  notes list
+  notes ls
+  notes search antifragile
+  notes find "writing notes"
+
+EOF
+}
+
+# Main command dispatcher
+main() {
+  if [[ $# -eq 0 ]]; then
+    cmd_help
+    exit 0
+  fi
+
+  local command="$1"
+  shift
+
+  case "$command" in
+    new)
+      cmd_new "$@"
+      ;;
+    list|ls)
+      cmd_list "$@"
+      ;;
+    search|find)
+      cmd_search "$@"
+      ;;
+    help|--help|-h)
+      cmd_help
+      ;;
+    *)
+      error "Unknown command: $command\n$(cmd_help)"
+      ;;
+  esac
+}
+
+main "$@"

@@ -42,13 +42,6 @@ fi
 echo "Creating dotfiles directory..."
 mkdir -p "${DOTFILES_DIR}"
 
-if [ -d "${HOME}/.config" ]; then
-  echo "Backing up existing .config directory..."
-  config_backup="${HOME}/.config.bak.$(date +%Y%m%d_%H%M%S)"
-  mv "${HOME}/.config" "${config_backup}"
-  echo "Backup saved to: ${config_backup}"
-fi
-
 echo "Creating .config directory..."
 mkdir -p "${HOME}/.config"
 

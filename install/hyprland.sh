@@ -4,8 +4,7 @@ set -euo pipefail
 source "${DOTFILES_DIR}/install/helpers.sh"
 
 if ! command -v dnf &>/dev/null; then
-  log "dnf not found, skipping Hyprland installation"
-  exit 0
+  warn "dnf not found, skipping Hyprland installation." || return
 fi
 
 PACKAGES=(

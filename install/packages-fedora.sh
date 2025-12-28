@@ -1,9 +1,10 @@
 #!/bin/bash
 set -euo pipefail
 
+source "${DOTFILES_DIR}/install/helpers.sh"
+
 if ! command -v dnf &>/dev/null; then
-  echo "Error: dnf not found. This script is only for Fedora-based systems."
-  exit 1
+  warn "dnf not found. This script is only for Fedora-based systems." || return
 fi
 
 MAIN_PACKAGES=(
@@ -53,10 +54,6 @@ install_gum() {
 
 # Install gum first so we can use log function
 install_gum
-
-# Source helper functions now that gum is available
-source "${DOTFILES_DIR}/install/helpers.sh"
-trap cleanup EXIT
 
 install_main_packages() {
   log "Installing main packages..."

@@ -4,8 +4,7 @@ set -euo pipefail
 source "${DOTFILES_DIR}/install/helpers.sh"
 
 if ! command -v xdg-user-dirs-update &> /dev/null; then
-  log "xdg-user-dirs-update not found, skipping."
-  exit 0
+  warn "xdg-user-dirs-update not found, skipping." || return
 fi
 
 USER_DIRS_FILE="$HOME/.config/user-dirs.dirs"

@@ -3,8 +3,7 @@
 source "${DOTFILES_DIR}/install/helpers.sh"
 
 if ! command -v systemctl &> /dev/null; then
-  log "systemd not found, skipping Docker configuration."
-  exit 0
+  warn "systemd not found, skipping Docker configuration." || return
 fi
 
 # Configure Docker daemon:

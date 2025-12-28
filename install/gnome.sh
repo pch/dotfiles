@@ -3,9 +3,8 @@ set -eou pipefail
 
 source "${DOTFILES_DIR}/install/helpers.sh"
 
-if ! command -v gsettings &> /dev/null; then
-  log "gsettings not found, skipping GNOME configuration."
-  exit 0
+if ! command -v gsettings &> /dev/null || uname -s | grep -q "Darwin"; then
+  warn "GNOME is not installed on this system, skipping configuration." || return
 fi
 
 # ╔════════════════════════════════════════════════════════════════════════════╗

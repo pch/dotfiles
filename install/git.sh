@@ -1,5 +1,9 @@
 #!/bin/bash
 
+source "${DOTFILES_DIR}/install/helpers.sh"
+
+log "Configuring git..."
+
 mkdir -p ~/.config/git
 touch ~/.config/git/config
 
@@ -20,3 +24,5 @@ if ! git config --global --get user.email &>/dev/null; then
     git config --global user.email "$email_address"
   fi
 fi
+
+log "Git configuration complete."

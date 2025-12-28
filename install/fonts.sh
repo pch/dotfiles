@@ -31,11 +31,15 @@ else
 fi
 
 # Install Inter font
-if dnf list installed rsms-inter-fonts &>/dev/null; then
-  log "Inter font already installed, skipping..."
+if command -v dnf &>/dev/null; then
+  if dnf list installed rsms-inter-fonts &>/dev/null; then
+    log "Inter font already installed, skipping..."
+  else
+    log "Installing Inter font..."
+    sudo dnf install -y rsms-inter-fonts
+  fi
 else
-  log "Installing Inter font..."
-  sudo dnf install -y rsms-inter-fonts
+  log "dnf not found, skipping Inter font installation."
 fi
 
 log "Rebuilding font cache..."

@@ -28,9 +28,3 @@ GPG setup isn't triggered by default. Run it manually:
 ```bash
 ./install/gpg.sh
 ```
-
-To install Hyprland packages and dotfiles, run:
-
-```bash
-./install/hyprland.sh
-```

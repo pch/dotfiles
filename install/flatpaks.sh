@@ -3,7 +3,11 @@ set -euo pipefail
 
 source "${DOTFILES_DIR}/install/helpers.sh"
 
-# Flatpak applications
+if ! command -v flatpak &> /dev/null; then
+  log "Flatpak not found, skipping."
+  exit 0
+fi
+
 FLATPAKS=(
   com.brave.Browser
   com.slack.Slack
@@ -14,7 +18,6 @@ FLATPAKS=(
   org.localsend.localsend_app
 )
 
-# Add Flathub repository
 if ! flatpak remote-list | grep -q flathub; then
   log "Adding Flathub repository..."
   flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
@@ -22,7 +25,6 @@ else
   log "Flathub repository already configured"
 fi
 
-# Install Flatpak applications
 log "Installing Flatpak applications..."
 for app in "${FLATPAKS[@]}"; do
   if flatpak list --app | grep -q "$app"; then

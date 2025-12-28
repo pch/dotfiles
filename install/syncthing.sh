@@ -2,6 +2,11 @@
 
 source "${DOTFILES_DIR}/install/helpers.sh"
 
+if ! command -v systemctl &> /dev/null; then
+  log "systemd not found, skipping Syncthing configuration."
+  exit 0
+fi
+
 if systemctl --user is-enabled syncthing.service &>/dev/null; then
   log "Syncthing already enabled"
 else

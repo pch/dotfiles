@@ -1,6 +1,13 @@
 #!/bin/bash
 set -eou pipefail
 
+source "${DOTFILES_DIR}/install/helpers.sh"
+
+if ! command -v gsettings &> /dev/null; then
+  log "gsettings not found, skipping GNOME configuration."
+  exit 0
+fi
+
 # ╔════════════════════════════════════════════════════════════════════════════╗
 # ║ General                                                                    ║
 # ╚════════════════════════════════════════════════════════════════════════════╝

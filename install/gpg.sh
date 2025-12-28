@@ -18,7 +18,8 @@ fi
 log "GPG key $KEY_ID not found. Attempting to import from 1Password..."
 
 if ! command -v op &>/dev/null; then
-  error "1Password CLI (op) is not installed. Please install it first."
+  log "1Password CLI (op) not found, skipping GPG key import."
+  exit 0
 fi
 
 if ! op account list &>/dev/null; then

@@ -1,5 +1,12 @@
 #!/bin/bash
 
+source "${DOTFILES_DIR}/install/helpers.sh"
+
+if ! command -v systemctl &> /dev/null; then
+  log "systemd not found, skipping Docker configuration."
+  exit 0
+fi
+
 # Configure Docker daemon:
 # - limit log size to avoid running out of disk
 # - use host's DNS resolver

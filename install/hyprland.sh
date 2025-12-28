@@ -3,7 +3,12 @@ set -euo pipefail
 
 source "${DOTFILES_DIR}/install/helpers.sh"
 
-packages=(
+if ! command -v dnf &>/dev/null; then
+  log "dnf not found, skipping Hyprland installation"
+  exit 0
+fi
+
+PACKAGES=(
   hyprland
   hypridle
   hyprlock
@@ -20,7 +25,7 @@ packages=(
   wiremix
 )
 
-copr_repos=(
+COPR_REPOS=(
   sdegler/hyprland
   erikreider/swayosd
 )
@@ -32,11 +37,11 @@ log "Hyprland dotfiles stowed successfully!"
 log "Enabling COPR repositories for Hyprland..."
 sudo dnf install -y dnf-plugins-core
 
-for repo in "${copr_repos[@]}"; do
+for repo in "${COPR_REPOS[@]}"; do
   sudo dnf copr enable -y "$repo"
 done
 
 log "Installing Hyprland packages..."
-sudo dnf install -y "${packages[@]}"
+sudo dnf install -y "${PACKAGES[@]}"
 
 log "Hyprland installation completed successfully"

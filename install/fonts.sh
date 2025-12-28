@@ -3,6 +3,11 @@ set -euo pipefail
 
 source "${DOTFILES_DIR}/install/helpers.sh"
 
+if ! command -v fc-cache &> /dev/null; then
+  log "fontconfig not found, skipping font installation."
+  exit 0
+fi
+
 JETBRAINS_URL="https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/JetBrainsMono.zip"
 FONT_DIR="${HOME}/.local/share/fonts"
 TEMP_DIR=$(mktemp -d)

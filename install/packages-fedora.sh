@@ -1,13 +1,11 @@
 #!/bin/bash
 set -euo pipefail
 
-# Check if dnf is available (Fedora-based system)
 if ! command -v dnf &>/dev/null; then
   echo "Error: dnf not found. This script is only for Fedora-based systems."
   exit 1
 fi
 
-# Main packages
 MAIN_PACKAGES=(
   bat
   btop
@@ -38,7 +36,6 @@ MAIN_PACKAGES=(
   pipx
 )
 
-# COPR repositories
 COPR_PACKAGES=(
   jdxcode/mise
   scottames/ghostty
@@ -110,7 +107,9 @@ install_extra() {
   rm -rf "${TEMP_DIR}"
 }
 
-# Run installations
+clear
+gum style --foreground 3 --padding "1 0 0 1" "Installing..."
+
 install_main_packages
 install_copr_packages
 install_extra

@@ -39,14 +39,14 @@ if [ -d "${DOTFILES_DIR}" ]; then
   echo "Backup saved to: ${backup_dir}"
 fi
 
-echo "Creating dotfiles directory..."
+echo "Creating dotfiles directory... $DOTFILES_DIR"
 mkdir -p "${DOTFILES_DIR}"
 
-echo "Creating .config directory..."
+echo "Creating .config directory... ${HOME}/.config"
 mkdir -p "${HOME}/.config"
 
 echo "Cloning repository from https://github.com/${DOTFILES_REPO}..."
-git clone "https://github.com/${DOTFILES_REPO}.git" "${DOTFILES_DIR}"
+git clone "git@github.com:${DOTFILES_REPO}.git" "${DOTFILES_DIR}"
 
 echo ""
 echo "Repository cloned successfully!"

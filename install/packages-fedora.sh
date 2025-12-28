@@ -1,40 +1,38 @@
-#!/bin/bash
-set -euo pipefail
+#!/usr/bin/env bash
+set -eu
 
 source "${DOTFILES_DIR}/install/helpers.sh"
 
-if ! command -v dnf &>/dev/null; then
-  warn "dnf not found. This script is only for Fedora-based systems." || return
-fi
+require_cmd "dnf" "dnf not found. This script is only for Fedora-based systems." || return
 
 MAIN_PACKAGES=(
+  atuin
   bat
   btop
   cargo
   eza
+  exiftool
   fd
   ffmpeg
   ffmpegthumbnailer
+  fortune-mod
   fzf
   git
   gum
   ImageMagick
   jq
   neovim
+  pipx
   ripgrep
   rsync
+  shellcheck
   starship
   stow
+  syncthing
   tldr
   unzip
-  zoxide
-  atuin
-  exiftool
-  fortune-mod
   vips
-  shellcheck
-  syncthing
-  pipx
+  zoxide
 )
 
 COPR_PACKAGES=(
@@ -42,7 +40,7 @@ COPR_PACKAGES=(
   scottames/ghostty
 )
 
-echo "Updating system packages..."
+log "Updating system packages..."
 sudo dnf upgrade -y --refresh
 
 install_gum() {
@@ -52,7 +50,7 @@ install_gum() {
   fi
 }
 
-# Install gum first so we can use log function
+# Install gum first so we can have pretty logs
 install_gum
 
 install_main_packages() {
@@ -64,9 +62,9 @@ install_copr_packages() {
   log "Installing COPR packages..."
   for repo in "${COPR_PACKAGES[@]}"; do
     local package="${repo##*/}"
-    log "Enabling COPR repository: $repo"
+    log "Enabling COPR repository: $repo..."
     sudo dnf copr enable -y "$repo"
-    log "Installing: $package"
+    log "Installing: $package..."
     sudo dnf install -y "$package" || true
   done
 }
@@ -104,9 +102,10 @@ install_extra() {
   rm -rf "${TEMP_DIR}"
 }
 
-clear
-gum style --foreground 3 --padding "1 0 0 1" "Installing..."
+log "Installing Fedora packages..."
 
 install_main_packages
 install_copr_packages
 install_extra
+
+log "Fedora package installation complete."

@@ -1,11 +1,9 @@
-#!/bin/bash
-set -euo pipefail
+#!/usr/bin/env bash
+set -eu
 
 source "${DOTFILES_DIR}/install/helpers.sh"
 
-if ! command -v xdg-user-dirs-update &> /dev/null; then
-  warn "xdg-user-dirs-update not found, skipping." || return
-fi
+require_cmd "xdg-user-dirs-update" || return
 
 USER_DIRS_FILE="$HOME/.config/user-dirs.dirs"
 USER_CONF_FILE="$HOME/.config/user-dirs.conf"
@@ -46,9 +44,9 @@ for dir in "${DIRS_TO_REMOVE[@]}"; do
   if [ -e "$dir" ]; then
     if gum confirm "Remove existing directory: $dir?"; then
       rm -rf "$dir"
-      log "Removed $dir"
+      log "Removed $dir."
     else
-      log "Skipped removing $dir"
+      log "Skipped removing $dir."
     fi
   fi
 done

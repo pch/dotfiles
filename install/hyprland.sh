@@ -1,26 +1,29 @@
-#!/bin/bash
-set -euo pipefail
+#!/usr/bin/env bash
+set -eu
 
 source "${DOTFILES_DIR}/install/helpers.sh"
 
-if ! command -v dnf &>/dev/null; then
-  warn "dnf not found, skipping Hyprland installation." || return
+require_cmd "dnf" "dnf not found, skipping Hyprland installation." || return
+
+if ! gum confirm "Install Hyprland packages and config?"; then
+  log "Skipping Hyprland installation."
+  return
 fi
 
 PACKAGES=(
-  hyprland
-  hypridle
-  hyprlock
-  hyprsunset
-  hyprland-guiutils
-  hyprpaper
-  hyprpicker
-  waybar
   fuzzel
   grim
-  slurp
+  hyprland
+  hyprland-guiutils
+  hypridle
+  hyprlock
+  hyprpaper
+  hyprpicker
   hyprshot
+  hyprsunset
+  slurp
   swayosd
+  waybar
   wiremix
 )
 
@@ -31,7 +34,7 @@ COPR_REPOS=(
 
 log "Stowing Hyprland dotfiles..."
 stow -d "${DOTFILES_DIR}" -t "${HOME}" dotfiles-hyprland
-log "Hyprland dotfiles stowed successfully!"
+log "Hyprland dotfiles stowed."
 
 log "Enabling COPR repositories for Hyprland..."
 sudo dnf install -y dnf-plugins-core
@@ -43,4 +46,4 @@ done
 log "Installing Hyprland packages..."
 sudo dnf install -y "${PACKAGES[@]}"
 
-log "Hyprland installation completed successfully"
+log "Hyprland installation complete."

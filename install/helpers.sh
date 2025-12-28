@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Prevent double sourcing
 [[ -n "${HELPERS_LOADED:-}" ]] && return
@@ -14,7 +14,6 @@ gum() {
   fi
 }
 
-# Logging functions
 log() {
   local script_name
   script_name=$(basename "${BASH_SOURCE[1]}")
@@ -44,10 +43,26 @@ error() {
   exit 1
 }
 
-# Run step helper
+require_cmd() {
+  local cmd="$1"
+  local message="${2:-$cmd not found, skipping.}"
+
+  if ! command -v "$cmd" &> /dev/null; then
+    warn "$message"
+    return 1
+  fi
+  return 0
+}
+
 run_step() {
   local desc="$1"
   local script="$2"
+
+  # If script doesn't start with /, prepend install dir
+  if [[ "$script" != /* ]]; then
+    script="${DOTFILES_DIR}/install/${script}"
+  fi
+
   echo ""
 
   if command -v gum &> /dev/null; then

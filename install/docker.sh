@@ -1,10 +1,9 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 source "${DOTFILES_DIR}/install/helpers.sh"
 
-if ! command -v systemctl &> /dev/null; then
-  warn "systemd not found, skipping Docker configuration." || return
-fi
+require_cmd "docker" "docker not installed, skipping." || return
+require_cmd "systemctl" "systemd not found, skipping docker configuration." || return
 
 # Configure Docker daemon:
 # - limit log size to avoid running out of disk

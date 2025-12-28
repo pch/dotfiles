@@ -1,5 +1,5 @@
-#!/bin/bash
-set -euo pipefail
+#!/usr/bin/env bash
+set -eu
 
 source "${DOTFILES_DIR}/install/helpers.sh"
 
@@ -15,7 +15,7 @@ if gpg --list-keys "$KEY_ID" &>/dev/null; then
   exit 0
 fi
 
-log "GPG key $KEY_ID not found. Attempting to import from 1Password..."
+log "GPG key $KEY_ID not found, attempting to import from 1Password..."
 
 if ! command -v op &>/dev/null; then
   log "1Password CLI (op) not found, skipping GPG key import."
@@ -30,7 +30,7 @@ log "Importing GPG key from 1Password..."
 op read "op://Private/GPG Key/private_key" | gpg --import
 
 if gpg --list-keys "$KEY_ID" &>/dev/null; then
-  log "Successfully imported GPG key $KEY_ID"
+  log "Successfully imported GPG key $KEY_ID."
 
   # Set trust level to ultimate for the key
   echo -e "5\ny\n" | gpg --command-fd 0 --expert --edit-key "$KEY_ID" trust quit
@@ -39,7 +39,7 @@ if gpg --list-keys "$KEY_ID" &>/dev/null; then
   git config --global commit.gpgsign true
   git config --global tag.gpgSign true
 
-  log "GPG setup complete!"
+  log "GPG setup complete."
 else
   error "Failed to import GPG key. Please check your 1Password reference."
 fi

@@ -1,11 +1,13 @@
-#!/bin/bash
-set -eou pipefail
+#!/usr/bin/env bash
+set -eu
 
 source "${DOTFILES_DIR}/install/helpers.sh"
 
-if ! command -v gsettings &> /dev/null || uname -s | grep -q "Darwin"; then
-  warn "GNOME is not installed on this system, skipping configuration." || return
+if uname -s | grep -q "Darwin"; then
+  warn "GNOME is not available on macOS, skipping configuration." || return
 fi
+
+require_cmd "gsettings" "GNOME is not installed on this system, skipping configuration." || return
 
 # ╔════════════════════════════════════════════════════════════════════════════╗
 # ║ General                                                                    ║

@@ -1,12 +1,9 @@
-#!/bin/bash
-set -euo pipefail
+#!/usr/bin/env bash
+set -eu
 
 source "${DOTFILES_DIR}/install/helpers.sh"
 
-if ! command -v flatpak &> /dev/null; then
-  log "Flatpak not found, skipping."
-  exit 0
-fi
+require_cmd "flatpak" "Flatpak not found, skipping." || return
 
 FLATPAKS=(
   com.brave.Browser
@@ -22,17 +19,17 @@ if ! flatpak remote-list | grep -q flathub; then
   log "Adding Flathub repository..."
   flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 else
-  log "Flathub repository already configured"
+  log "Flathub repository already configured."
 fi
 
 log "Installing Flatpak applications..."
 for app in "${FLATPAKS[@]}"; do
   if flatpak list --app | grep -q "$app"; then
-    log "Already installed: $app"
+    log "Already installed: $app."
   else
-    log "Installing: $app"
-    flatpak install -y flathub "$app" || log "Failed to install: $app"
+    log "Installing: $app..."
+    flatpak install -y flathub "$app" || log "Failed to install: $app."
   fi
 done
 
-log "Flatpak setup complete"
+log "Flatpak setup complete."

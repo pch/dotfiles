@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 source "${DOTFILES_DIR}/install/helpers.sh"
 

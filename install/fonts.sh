@@ -1,12 +1,9 @@
-#!/bin/bash
-set -euo pipefail
+#!/usr/bin/env bash
+set -eu
 
 source "${DOTFILES_DIR}/install/helpers.sh"
 
-if ! command -v fc-cache &> /dev/null; then
-  log "fontconfig not found, skipping font installation."
-  exit 0
-fi
+require_cmd "fc-cache" "fontconfig not found, skipping font installation." || exit 0
 
 JETBRAINS_URL="https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/JetBrainsMono.zip"
 FONT_DIR="${HOME}/.local/share/fonts"
@@ -16,10 +13,10 @@ mkdir -p "${FONT_DIR}"
 
 # Install JetBrains Mono Nerd Font
 if fc-list | grep -q "JetBrainsMono Nerd Font"; then
-  log "JetBrains Mono Nerd Font already installed, skipping..."
+  log "JetBrains Mono Nerd Font already installed."
 else
   log "Downloading JetBrains Mono Nerd Font..."
-  curl -L "${JETBRAINS_URL}" -o "${TEMP_DIR}/JetBrainsMono.zip"
+  curl -L --progress-bar "${JETBRAINS_URL}" -o "${TEMP_DIR}/JetBrainsMono.zip"
 
   log "Extracting JetBrains Mono fonts..."
   unzip -o "${TEMP_DIR}/JetBrainsMono.zip" -d "${TEMP_DIR}/JetBrainsMono"
@@ -33,7 +30,7 @@ fi
 # Install Inter font
 if command -v dnf &>/dev/null; then
   if dnf list installed rsms-inter-fonts &>/dev/null; then
-    log "Inter font already installed, skipping..."
+    log "Inter font already installed."
   else
     log "Installing Inter font..."
     sudo dnf install -y rsms-inter-fonts
@@ -43,6 +40,6 @@ else
 fi
 
 log "Rebuilding font cache..."
-fc-cache -fv
+fc-cache -fv >/dev/null 2>&1
 
-log "Fonts installed successfully!"
+log "Fonts installed."

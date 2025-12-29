@@ -10,7 +10,6 @@ MAIN_PACKAGES=(
   bat
   btop
   cargo
-  eza
   exiftool
   fd
   ffmpeg
@@ -26,7 +25,6 @@ MAIN_PACKAGES=(
   ripgrep
   rsync
   shellcheck
-  starship
   stow
   syncthing
   tldr
@@ -87,6 +85,9 @@ install_extra() {
     sudo sh -c 'echo -e "[1password]\nname=1Password Beta Channel\nbaseurl=https://downloads.1password.com/linux/rpm/beta/\$basearch\nenabled=1\ngpgcheck=1\nrepo_gpgcheck=1\ngpgkey=\"https://downloads.1password.com/linux/keys/1password.asc\"" > /etc/yum.repos.d/1password.repo'
     sudo dnf install -y 1password
   fi
+
+  log "Installing starship..."
+  curl -sS https://starship.rs/install.sh | sh
 }
 
 log "Installing Fedora packages..."

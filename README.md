@@ -1,4 +1,4 @@
-# My Dotfiles
+# My dotfiles
 
 My personal dotfiles for Linux.
 
@@ -26,7 +26,8 @@ The zsh config should work on macOS as well.
 
 ```bash
 mkdir -p ~/.local/share/dotfiles
-git clone git@github.com:pch/dotfiles.git ~/.local/share/dotfiles
+git clone https://github.com/pch/dotfiles ~/.local/share/dotfiles
+cd ~/.local/share/dotfiles
 ./install/install.sh
 ```
 

@@ -7,7 +7,7 @@ HELPERS_LOADED=1
 # Wrapper to use gum if available, otherwise just echo the last argument
 # (because gum is not always installed during initial setup)
 gum() {
-  if command -v gum &> /dev/null; then
+  if type -P gum &> /dev/null; then
     command gum "$@"
   else
     echo "${@: -1}"  # just echo the last argument (the actual text)
@@ -65,7 +65,7 @@ run_step() {
 
   echo ""
 
-  if command -v gum &> /dev/null; then
+  if type -P gum &> /dev/null; then
     gum style --border rounded --border-foreground 6 --padding "0 1" --bold "$desc"
   else
     printf "\033[1m==> %s\033[0m\n" "$desc"

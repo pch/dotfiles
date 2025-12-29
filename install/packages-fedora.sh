@@ -88,6 +88,9 @@ install_extra() {
 
   log "Installing starship..."
   curl -sS https://starship.rs/install.sh | sh
+
+  log "Installing eza..."
+  cargo install eza
 }
 
 log "Installing Fedora packages..."

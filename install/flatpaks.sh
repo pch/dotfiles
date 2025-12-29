@@ -6,7 +6,6 @@ source "${DOTFILES_DIR}/install/helpers.sh"
 require_cmd "flatpak" "Flatpak not found, skipping." || return
 
 FLATPAKS=(
-  com.brave.Browser
   com.slack.Slack
   com.obsproject.Studio
   md.obsidian.Obsidian

@@ -71,6 +71,11 @@ install_copr_packages() {
 install_extra() {
   log "Installing extra packages with custom repositories..."
 
+  # Brave (don't use flatpak, it's a meess: can't be set as default, can't integrate with 1Password)
+  log "Installing Brave..."
+  sudo dnf config-manager addrepo --overwrite --from-repofile=https://brave-browser-rpm-release.s3.brave.com/brave-browser.repo
+  sudo dnf install -y brave-browser
+
   # Docker
   log "Installing Docker..."
   sudo dnf config-manager addrepo --overwrite --from-repofile https://download.docker.com/linux/fedora/docker-ce.repo

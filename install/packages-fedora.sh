@@ -87,19 +87,6 @@ install_extra() {
     sudo sh -c 'echo -e "[1password]\nname=1Password Beta Channel\nbaseurl=https://downloads.1password.com/linux/rpm/beta/\$basearch\nenabled=1\ngpgcheck=1\nrepo_gpgcheck=1\ngpgkey=\"https://downloads.1password.com/linux/keys/1password.asc\"" > /etc/yum.repos.d/1password.repo'
     sudo dnf install -y 1password
   fi
-
-  # wl-cliboard (built from source for the --sensitive option support)
-  log "Installing wl-clipboard from source..."
-  sudo dnf install -y meson ninja-build
-  TEMP_DIR=$(mktemp -d)
-  git clone https://github.com/bugaevc/wl-clipboard.git "${TEMP_DIR}/wl-clipboard"
-  pushd "${TEMP_DIR}/wl-clipboard" >/dev/null
-  meson setup build
-  cd build
-  ninja
-  sudo ninja install
-  popd >/dev/null
-  rm -rf "${TEMP_DIR}"
 }
 
 log "Installing Fedora packages..."

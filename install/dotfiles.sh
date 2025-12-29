@@ -9,3 +9,5 @@ log "Stowing dotfiles..."
 stow -d "${DOTFILES_DIR}" -t "${HOME}" dotfiles
 
 log "Dotfiles stowed."
+
+ln -s ~/.config/.XCompose ~/.XCompose

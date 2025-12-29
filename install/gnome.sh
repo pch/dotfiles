@@ -32,8 +32,8 @@ gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
 # ║ Hotkeys                                                                    ║
 # ╚════════════════════════════════════════════════════════════════════════════╝
 
-# Caps lock as Ctrl, this is the way
-gsettings set org.gnome.desktop.input-sources xkb-options "['ctrl:nocaps']"
+# Caps lock as Ctrl (this is the way) + right Ctrl as Compose key
+gsettings set org.gnome.desktop.input-sources xkb-options "['ctrl:nocaps', 'compose:rctrl']"
 
 # Close with Super+W (Alt+F4 is the default)
 gsettings set org.gnome.desktop.wm.keybindings close "['<Super>w']"

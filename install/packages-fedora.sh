@@ -31,6 +31,7 @@ MAIN_PACKAGES=(
   unzip
   vips
   zoxide
+  zsh
 )
 
 COPR_PACKAGES=(
@@ -90,7 +91,7 @@ install_extra() {
   curl -sS https://starship.rs/install.sh | sh
 
   log "Installing eza..."
-  cargo install eza
+  cargo install eza<D-s>
 }
 
 log "Installing Fedora packages..."

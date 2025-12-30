@@ -25,6 +25,7 @@ PACKAGES=(
   swayosd
   waybar
   wiremix
+  xdg-terminal-exec
 )
 
 COPR_REPOS=(

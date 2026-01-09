@@ -47,4 +47,7 @@ done
 log "Installing Hyprland packages..."
 sudo dnf install -y "${PACKAGES[@]}"
 
+log "Setting theme"
+$DOTFILES_DIR/bin/system-theme set dark
+
 log "Hyprland installation complete."

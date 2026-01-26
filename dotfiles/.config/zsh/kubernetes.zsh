@@ -50,9 +50,30 @@ kubectl() {
 #
 # ...and more.
 
+# extract namespace args (-n/--namespace) from arguments
+kube__ns_args() {
+  local args=("$@")
+  local i=1
+  while (( i <= ${#args[@]} )); do
+    case "${args[$i]}" in
+      -n|--namespace)
+        echo -n "${args[$i]} ${args[$((i+1))]} "
+        (( i += 2 ))
+        ;;
+      -n*|--namespace=*)
+        echo -n "${args[$i]} "
+        (( i++ ))
+        ;;
+      *)
+        (( i++ ))
+        ;;
+    esac
+  done
+}
+
 # allow to choose pod name using fzf
 kube__pod() {
-  kubectl get pods -o json | jq -r '.items[] .metadata.name' | fzf
+  kubectl get pods "$@" -o json | jq -r '.items[] .metadata.name' | fzf
 }
 
 # list contexts
@@ -87,17 +108,17 @@ kube__lsc() {
 
 # attach to pod, run bash (select name with fzf)
 kube__bash() {
-  kubectl exec -it $(kube__pod) -- bash
+  kubectl exec "$@" -it $(kube__pod $(kube__ns_args "$@")) -- bash
 }
 
 # describe pod (select name with fzf)
 kube__dpod() {
-  kubectl describe pod $(kube__pod)
+  kubectl describe pod "$@" $(kube__pod $(kube__ns_args "$@"))
 }
 
 # show logs for pod (select name with fzf)
 kube__log() {
-  kubectl logs $(kube__pod) "$@"
+  kubectl logs "$@" $(kube__pod $(kube__ns_args "$@"))
 }
 
 # logs for app

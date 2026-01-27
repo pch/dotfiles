@@ -3,7 +3,7 @@ export LANG="en_US.UTF-8"
 export LC_ALL="en_US.UTF-8"
 
 export DOTFILES_DIR="${HOME}/.local/share/dotfiles"
-export PATH="./bin:${DOTFILES_DIR}/bin:$HOME/.local/bin:$HOME/.cargo/bin:$HOME/.atuin/bin:$PATH"
+export PATH="./bin:${DOTFILES_DIR}/bin:$HOME/.local/bin:$HOME/.cargo/bin:$HOME/.atuin/bin:$HOME/.opencode/bin:$PATH"
 export EDITOR="nvim"
 
 export XDG_CONFIG_HOME="${HOME}/.config"

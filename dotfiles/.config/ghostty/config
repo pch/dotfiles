@@ -5,7 +5,7 @@ theme = Tomorrow Night
 # Font
 font-family = "JetBrainsMono Nerd Font"
 font-style = Regular
-font-size = 10
+font-size = 13
 # disable ligatures
 font-feature = -calt, -liga, -dlig
 

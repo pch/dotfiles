@@ -127,6 +127,29 @@ kube__logapp() {
   kubectl logs -l app="$app_label" "$@"
 }
 
+# delete all pods matching a status (e.g. Error, Evicted, etc.)
+kube__cleanup() {
+  local ns_args=$(kube__ns_args "$@")
+  local pod_status="${@[-1]}"
+
+  if [[ "$pod_status" == -* ]] || [[ -z "$pod_status" ]]; then
+    echo "Usage: kube cleanup [-n namespace] <status>"
+    echo "Example: kube cleanup -n foo Error"
+    return 1
+  fi
+
+  local pods=$(kubectl get pods $ns_args --no-headers | grep "$pod_status" | cut -d' ' -f 1)
+
+  if [[ -z "$pods" ]]; then
+    echo "No pods with status '$pod_status' found"
+    return 0
+  fi
+
+  echo "Deleting pods:"
+  echo "$pods"
+  echo "$pods" | xargs kubectl delete pod $ns_args
+}
+
 kube() {
   if [ $# -eq 0 ]; then
     echo "Usage:\n"

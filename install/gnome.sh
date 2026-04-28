@@ -75,28 +75,44 @@ gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-6 "['<Super><Sh
 # Resize windows
 gsettings set org.gnome.desktop.wm.keybindings begin-resize "['<Super>BackSpace']"
 
-# Reserve slots for custom keybindings
-gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings \
-  "['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/', \
-    '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/', \
-    '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/']"
-
 gsettings set org.gnome.desktop.wm.keybindings switch-input-source "@as []"
 
+custom_keybinding_paths=()
+
+add_custom_keybinding() {
+  local id="$1"
+  local name="$2"
+  local command="$3"
+  local binding="$4"
+  local path="/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom${id}/"
+  local schema="org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:${path}"
+
+  custom_keybinding_paths+=("'${path}'")
+  gsettings set "$schema" name "$name"
+  gsettings set "$schema" command "$command"
+  gsettings set "$schema" binding "$binding"
+}
+
+open_xdg_dir_command() {
+  local dir="$1"
+
+  printf "sh -c 'nautilus --new-window \"\$(xdg-user-dir %s)\"'" "$dir"
+}
+
 # start a new ghostty window (rather than just switch to the already open one)
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ name 'new ghostty window'
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ command 'ghostty'
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ binding '<shift><alt>2'
+add_custom_keybinding 0 'new ghostty window' 'ghostty' '<Shift><Alt>2'
 
 # Copy GPG passphrase
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/ name 'copy gpg passphrase to clipboard'
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/ command "$HOME/.local/share/dotfiles/bin/gpg-copy-passphrase"
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/ binding '<super><alt>g'
+add_custom_keybinding 1 'copy gpg passphrase to clipboard' "$HOME/.local/share/dotfiles/bin/gpg-copy-passphrase" '<Super><Alt>g'
 
 # 1Password quick access
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/ name '1Password quick access'
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/ command '/usr/bin/1password --quick-access'
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/ binding '<Shift><Super>slash'
+add_custom_keybinding 2 '1Password quick access' '/usr/bin/1password --quick-access' '<Shift><Super>slash'
+
+# Directory quicklinks
+add_custom_keybinding 3 'open documents' "$(open_xdg_dir_command DOCUMENTS)" '<Super><Alt>d'
+
+custom_keybindings=$(IFS=, ; echo "[${custom_keybinding_paths[*]}]")
+gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings "$custom_keybindings"
 
 # ╔════════════════════════════════════════════════════════════════════════════╗
 # ║ Extensions                                                                 ║

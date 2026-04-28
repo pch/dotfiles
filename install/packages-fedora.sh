@@ -57,6 +57,38 @@ install_main_packages() {
   sudo dnf install -y "${MAIN_PACKAGES[@]}" || true
 }
 
+install_rpm_fusion_packages() {
+  log "Installing RPM Fusion packages..."
+
+  sudo dnf install -y \
+    "https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm" \
+    "https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm"
+
+  sudo dnf upgrade --refresh -y
+
+  sudo dnf swap -y ffmpeg-free ffmpeg --allowerasing || true
+  sudo dnf swap -y libavcodec-free libavcodec-freeworld --allowerasing || true
+
+  sudo dnf install -y \
+    ffmpeg \
+    libavcodec-freeworld \
+    libheif-freeworld \
+    libheif-tools \
+    libwebp \
+    libavif \
+    ImageMagick \
+    gstreamer1-plugins-bad-free \
+    gstreamer1-plugins-bad-freeworld \
+    gstreamer1-plugins-good \
+    gstreamer1-plugins-base \
+    gstreamer1-plugin-openh264 \
+    gstreamer1-libav \
+    lame \
+    --allowerasing
+
+  flatpak install -y flathub org.freedesktop.Platform.ffmpeg-full//24.08
+}
+
 install_copr_packages() {
   log "Installing COPR packages..."
   for repo in "${COPR_PACKAGES[@]}"; do
@@ -102,6 +134,7 @@ install_extra() {
 log "Installing Fedora packages..."
 
 install_main_packages
+install_rpm_fusion_packages
 install_copr_packages
 install_extra
 

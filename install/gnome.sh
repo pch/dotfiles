@@ -75,6 +75,10 @@ gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-6 "['<Super><Sh
 # Resize windows
 gsettings set org.gnome.desktop.wm.keybindings begin-resize "['<Super>BackSpace']"
 
+# Lofree Flow84 emits XF86MonBrightnessUp alongside F2, which prevents F2 rename.
+gsettings set org.gnome.shell.keybindings screen-brightness-up "@as []"
+gsettings set org.gnome.shell.keybindings screen-brightness-up-monitor "@as []"
+
 gsettings set org.gnome.desktop.wm.keybindings switch-input-source "@as []"
 
 custom_keybinding_paths=()

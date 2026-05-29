@@ -1,6 +1,6 @@
 # Dynamic theme colors
 # config-file = ?"~/.config/current/theme/ghostty.conf"
-theme = Tomorrow Night
+theme = Kanagawa Wave
 
 # Font
 font-family = "JetBrainsMono Nerd Font"

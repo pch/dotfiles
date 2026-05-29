@@ -20,6 +20,7 @@ run_step "Setup fonts" "fonts.sh"
 run_step "Setup flatpaks" "flatpaks.sh"
 run_step "Setup docker" "docker.sh"
 run_step "Setup syncthing" "syncthing.sh"
+run_step "Setup logiops" "logiops.sh"
 
 # Run this manually - it requires 1Password vault to be set up first
 # run_step "Setup gpg" "gpg.sh"

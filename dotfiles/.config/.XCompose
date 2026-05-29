@@ -4,8 +4,8 @@ include "%L"
 <Multi_key> <m> <s> : "😄" # smile
 <Multi_key> <m> <c> : "😂" # cry
 <Multi_key> <m> <l> : "😍" # love
-<Multi_key> <m> <v> : "✌️"  # victory
-<Multi_key> <m> <h> : "❤️"  # heart
+<Multi_key> <m> <v> : "✌️" # victory
+<Multi_key> <m> <h> : "❤️" # heart
 <Multi_key> <m> <y> : "👍" # yes
 <Multi_key> <m> <n> : "👎" # no
 <Multi_key> <m> <f> : "🖕" # fuck
@@ -27,3 +27,10 @@ include "%L"
 
 # Typography
 <Multi_key> <space> <space> : "—"
+<Multi_key> <period> <period> : "·"
+
+# Arrows
+<Multi_key> <minus> <less>        : "←"
+<Multi_key> <minus> <greater>     : "→"
+<Multi_key> <minus> <asciicircum> : "↑"
+<Multi_key> <minus> <v>           : "↓"
